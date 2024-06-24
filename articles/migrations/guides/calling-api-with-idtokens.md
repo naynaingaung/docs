@@ -17,7 +17,7 @@ useCase:
 
 # Migration Guide: Management API and ID Tokens
 
-For some use cases you could use [ID Tokens](/tokens/id-token) in order to call some of the [Users](/api/management/v2#!/Users/get_users_by_id) and [Device Credentials](/api/management/v2#!/Device_Credentials/get_device_credentials) endpoints of the Management API. 
+For some use cases you could use [ID Tokens](/tokens/concepts/id-tokens) in order to call some of the [Users](/api/management/v2#!/Users/get_users_by_id) and [Device Credentials](/api/management/v2#!/Device_Credentials/get_device_credentials) endpoints of the Management API. 
 
 This functionality is being deprecated. You will have to use proper <dfn data-key="access-token">[Access Tokens](/tokens/access-token)</dfn> in order to access any of the endpoints of the [Management API](/api/management/v2). Make sure the `Allow ID Tokens for Management API v2 Authentication` toggle is turned off after completing the migration to Access Tokens.
 
@@ -25,7 +25,7 @@ The grace period for this migration started on **March 31, 2018** and at the mom
 
 Customers are encouraged to migrate to Access Tokens. This guide will help you with that. 
 
-First, we will see which use cases are affected. We will continue with reviewing how you can use <dfn data-key="scope">[scopes](/scopes)</dfn> to get tokens with different access rights, and then see all the ways you can use to get an Access Token. Finally, we will review the changes introduced in the [Account Linking](/link-accounts) process.
+First, we will see which use cases are affected. We will continue with reviewing how you can use <dfn data-key="scope">[scopes](/scopes)</dfn> to get tokens with different access rights, and then see all the ways you can use to get an Access Token. Finally, we will review the changes introduced in the [User Account Linking](/users/concepts/overview-user-account-linking) process.
 
 ## Does this affect me?
 
@@ -34,15 +34,15 @@ If you use ID Tokens to call any of the following endpoints, then you are affect
 | **Endpoint** | **Use Case** |
 |-|-|
 | [GET /api/v2/users/{id}](/api/management/v2#!/Users/get_users_by_id) | Retrieve a user's information |
-| [GET /api/v2/users/{id}/enrollments](/api/management/v2#!/Users/get_enrollments) | Retrieve all [Guardian](/multifactor-authentication/factors/push) MFA enrollments for a user |
+| [GET /api/v2/users/{id}/enrollments](/api/management/v2#!/Users/get_enrollments) | Retrieve all [Guardian](/mfa/concepts/guardian) MFA enrollments for a user |
 | [PATCH /api/v2/users/{id}](/api/management/v2#!/Users/patch_users_by_id) | Update a user's information |
-| [DELETE /api/v2/users/{id}/multifactor/{provider}](/api/management/v2#!/Users/delete_multifactor_by_provider) | Delete the [multi-factor](/multifactor-authentication) provider settings for a user |
+| [DELETE /api/v2/users/{id}/multifactor/{provider}](/api/management/v2#!/Users/delete_multifactor_by_provider) | Delete the MFA provider settings for a user |
 | [POST /api/v2/device-credentials](/api/management/v2#!/Device_Credentials/post_device_credentials) | Create a public key for a device |
 | [DELETE /api/v2/device-credentials/{id}](/api/management/v2#!/Device_Credentials/delete_device_credentials_by_id) | Delete a device credential |
-| [POST/api/v2/users/{id}/identities](/api/management/v2#!/Users/post_identities) | [Link user accounts](/link-accounts) from various identity providers |
-| [DELETE /api/v2/users/{id}/identities/{provider}/{user_id}](/api/management/v2#!/Users/delete_provider_by_user_id) | [Unlink user accounts](/link-accounts#unlinking-accounts) |
+| [POST/api/v2/users/{id}/identities](/api/management/v2#!/Users/post_identities) | [Link user accounts](/users/guides/link-user-accounts) from various identity providers |
+| [DELETE /api/v2/users/{id}/identities/{provider}/{user_id}](/api/management/v2#!/Users/delete_user_identity_by_user_id) | [Unlink user accounts](/users/guides/unlink-user-accounts) |
 
-These endpoints can now accept regular [Access Tokens](/tokens/overview-access-tokens).
+These endpoints can now accept regular [Access Tokens](/tokens/concepts/access-tokens).
 
 Note that the last two endpoints are used for Account Linking. To review these changes, see [Changes in Account Linking](#changes-in-account-linking).
 
@@ -57,7 +57,7 @@ The actions you can perform with the Management API depend on the [scopes](/scop
 | [GET /api/v2/users/{id}](/api/management/v2#!/Users/get_users_by_id) | `read:current_user` | `read:users` |
 | [GET /api/v2/users/{id}/enrollments](/api/management/v2#!/Users/get_enrollments) | `read:current_user` | `read:users` |
 | [POST/api/v2/users/{id}/identities](/api/management/v2#!/Users/post_identities) | `update:current_user_identities` | `update:users` |
-| [DELETE /api/v2/users/{id}/identities/{provider}/{user_id}](/api/management/v2#!/Users/delete_provider_by_user_id) | `update:current_user_identities` | `update:users` |
+| [DELETE /api/v2/users/{id}/identities/{provider}/{user_id}](/api/management/v2#!/Users/delete_user_identity_by_user_id) | `update:current_user_identities` | `update:users` |
 | [PATCH /api/v2/users/{id}](/api/management/v2#!/Users/patch_users_by_id) | `update:current_user_metadata` | `update:users` |
 | [PATCH /api/v2/users/{id}](/api/management/v2#!/Users/patch_users_by_id) | `create:current_user_metadata` | `update:users` |
 | [DELETE /api/v2/users/{id}/multifactor/{provider}](/api/management/v2#!/Users/delete_multifactor_by_provider) | `delete:current_user_metadata` | `update:users` |
@@ -191,7 +191,7 @@ The changes in this functionality are the following:
 
 For a detailed overview of these changes and migration steps per use case, see [Migration Guide: Account Linking and ID Tokens](/migrations/guides/account-linking).
 
-## Next steps
+## Keep reading
 
-- [Get Access Tokens](/tokens/guides/access-token/get-access-tokens)
+- [Get Access Tokens](/tokens/guides/get-access-tokens)
 - [Migration Guide: Account Linking and ID Tokens](/migrations/guides/account-linking)

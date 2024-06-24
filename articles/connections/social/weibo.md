@@ -1,9 +1,11 @@
 ---
-title: Add Weibo Login to Your App
+title: Connect Apps to Weibo
+description: Learn how to add login functionality to your app with Weibo.
 connection: Weibo
 image: /media/connections/weibo.png
 seo_alias: weibo
-description: How to add Weibo login to your app
+public: true
+index: 34
 toc: true
 topics:
   - connections
@@ -14,26 +16,10 @@ useCase:
     - customize-connections
     - add-idp
 ---
-# Add Weibo Login to Your App
-
-This guide will show you how to enable your users to log in to your Auth0 app using their Weibo credentials.
-
-## 1. Register Auth0 with Weibo
-
-Begin by [registering your Auth0 app with Weibo](https://open.weibo.com/authentication).
-
-You will be prompted to provide a <dfn data-key="callback">callback URL</dfn> during the registration process. Use `https://${account.namespace}/login/callback`.
-
-<%= include('../_find-auth0-domain-redirects') %>
-
-After the registration process, Weibo provides you with an **appkey** and a corresponding **appkey secret**. Make a note of these values, since you'll need to provide them to Auth0.
-
-## 2. Create and enable your Auth0 connection
-
-[Set up the Weibo social connection](/dashboard/guides/connections/set-up-connections-social) in Auth0. Make sure you have the **App key** and the **App secret** that Weibo provided to you in Step 1.
-
-## 3. Test the connection
-
-At this point, you're ready to [test your connection](/dashboard/guides/connections/test-connections-social).
-
+<%= include('../../../snippets/social/weibo/0') %> 
+<%= include('../../../snippets/social/weibo/1') %> 
+<%= include('../../../snippets/social/weibo/2') %> 
+<%= include('../../../snippets/social/weibo/3') %> 
+<%= include('../../../snippets/social/weibo/4') %> 
+<%= include('../../../snippets/social/weibo/5') %> 
 <%= include('../_quickstart-links.md') %>

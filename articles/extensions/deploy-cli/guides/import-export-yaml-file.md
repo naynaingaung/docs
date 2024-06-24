@@ -10,7 +10,7 @@ useCase: extensibility-extensions
 ---
 # Import/Export Tenant Configuration to YAML File
 
-The `auth0-deploy-cli` tool's **YAML option** supports the exporting to and importing of an Auth0 tenant configuration using a [YAML](http://yaml.org/) file.
+The `auth0-deploy-cli` tool's **YAML option** supports the exporting to and importing of an Auth0 tenant configuration using a [YAML](http://yaml.org/) file. You can find an [example config file and other examples of using `auth0-deploy-cli`](https://github.com/auth0/auth0-deploy-cli/) in the Github repo.
 
 ## Import tenant configuration
 
@@ -18,22 +18,28 @@ To import an Auth0 tenant configuration:
 
 1. Copy `config.json.example`, making sure to replace the placeholder values with the values specific to your configuration.
 
-   ```json
-   {
-     "AUTH0_DOMAIN": "<YOUR_TENANT>.auth0.com",
-     "AUTH0_CLIENT_ID": "<client_id>",
-     "AUTH0_CLIENT_SECRET": "<client_secret>",
-     "AUTH0_KEYWORD_REPLACE_MAPPINGS": {
-       "AUTH0_TENANT_NAME": "<NAME>",
-       "ENV": "DEV"
+  ```json
+  {
+    "AUTH0_DOMAIN": "<YOUR_TENANT>.auth0.com",
+    "AUTH0_CLIENT_ID": "<client_id>",
+    "AUTH0_CLIENT_SECRET": "<client_secret>",
+    "AUTH0_KEYWORD_REPLACE_MAPPINGS": {
+      "AUTH0_TENANT_NAME": "<NAME>",
+      "ENV": "DEV"
     },
-     "AUTH0_ALLOW_DELETE": false,
-     "AUTH0_EXCLUDED_RULES": [
-       "rule-1-name",
-       "rule-2-name"
-    ]
-   }
-   ```
+    "AUTH0_ALLOW_DELETE": false,
+    "AUTH0_EXCLUDED_RULES": [
+      "rule-1-name",
+      "rule-2-name"
+    ],
+    "INCLUDED_PROPS": {
+      "clients": [ "client_secret" ]
+    },
+    "EXCLUDED_PROPS": {
+      "connections": [ "options.client_secret" ]
+    }
+  }
+  ```
 
    Use the `client ID` and secret from your newly-created client (the client is named `auth0-deploy-cli-extension` if you used the extension).
 
@@ -44,7 +50,7 @@ To import an Auth0 tenant configuration:
 2. Deploy using the following command:
 
    ```bash
-   a0deploy import -c config.json -i tenant.yaml
+   a0deploy import --config_file config.json --input_file tenant.yaml
    ```
 
 ### Example: configuration file
@@ -53,24 +59,34 @@ Here is the example of a `config.json` file:
 
 ```json
 {
-  "AUTH0_DOMAIN": "<YOUR_TENANT>.auth0.com",
-  "AUTH0_CLIENT_ID": "<client_id>",
-  "AUTH0_CLIENT_SECRET": "<client_secret>",
+  "AUTH0_DOMAIN": "<your auth0 domain (e.g. fabrikam-dev.auth0.com) >",
+  "AUTH0_CLIENT_SECRET": "<your deploy client secret>",
+  "AUTH0_CLIENT_ID": "<your deploy client ID>",
   "AUTH0_KEYWORD_REPLACE_MAPPINGS": {
-    "AUTH0_TENANT_NAME": "<NAME>",
-    "ENV": "DEV"
+    "YOUR_ARRAY_KEY": [
+      "http://localhost:8080",
+      "https://somedomain.com"
+    ],
+    "YOUR_STRING_KEY": "some environment specific string"
   },
   "AUTH0_ALLOW_DELETE": false,
-  "AUTH0_EXCLUDED_RULES": [
-    "rule-1-name",
-    "rule-2-name"
-  ]
+  "INCLUDED_PROPS": {
+    "clients": [ "client_secret" ]
+  },
+  "EXCLUDED_PROPS": {
+    "connections": [ "options.client_secret" ],
+    "emailProvider": ["name", "credentials", "default_from_address", "enabled"]
+  },
+  "AUTH0_EXCLUDED_RULES": [ "auth0-account-link-extension" ],
+  "AUTH0_EXCLUDED_CLIENTS": [ "auth0-account-link" ],
+  "AUTH0_EXCLUDED_RESOURCE_SERVERS": [ "SSO Dashboard API" ],
+  "AUTH0_EXCLUDED_DEFAULTS": ["emailProvider"]
 }
 ```
 
 ### Import configuration example
 
-Here is an example of an import config file `tenant.yaml`:
+The following is an example of an import config file called `tenant.yaml` (for full details on everything that can be included, please refer to the [extension's repository](https://github.com/auth0/auth0-deploy-cli/tree/master/examples/directory):
 
 ```yaml
 tenant:
@@ -143,6 +159,16 @@ rulesConfigs:
   - key: "SOME_SECRET"
     value: 'some_key'
 
+hooks:
+  - name: "Client Credentials Exchange"
+    triggerId: "credentials-exchange"
+    enabled: true
+    secrets:
+      api-key: "my custom api key"
+    dependencies: 
+      bcrypt: "3.0.6"
+    script: "hooks/client-credentials-exchange.js"
+
 resourceServers:
   -
     name: "My API"
@@ -209,13 +235,27 @@ guardianFactorTemplates:
       {{code}} is your verification code for {{tenant.friendly_name}}. Please
       enter this code to verify your enrollment.
     verification_message: '{{code}} is your verification code for {{tenant.friendly_name}}'
+
+roles:
+  - name: Admin
+    description: App Admin
+    permissions:
+      - permission_name: 'update:account'
+        resource_server_identifier: 'https://##ENV##.myapp.com/api/v1'
+      - permission_name: 'read:account'
+        resource_server_identifier: 'https://##ENV##.myapp.com/api/v1'
+  - name: User
+    description: App User
+    permissions:
+      - permission_name: 'read:account'
+        resource_server_identifier: 'https://##ENV##.myapp.com/api/v1'
 ```
 
 ## Export tenant configuration
 
 To export your current tenant configuration, run a command that's similar to:
 
-`a0deploy export -c config.json -f yaml -o path/to/export`
+`a0deploy export --config_file config.json --format yaml --output_folder path/to/export`
 
 <%= include('../_includes/_strip-option') %>
 

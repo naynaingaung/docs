@@ -1,5 +1,5 @@
 ---
-title: OIDC-conformant Resource Owner Password Credentials exchange
+description: Understand how the Resource Owner Password Grant (ROPG) is used by highly-trusted apps to provide active authentication. 
 topics:
   - api-authentication
   - oidc
@@ -9,7 +9,9 @@ useCase:
   - secure-api
   - call-api
 ---
-# Resource Owner Password Credentials exchange
+# Resource Owner Password Credentials Exchange
+
+<%= include('../../_includes/_ropg-warning.md') %>
 
 <%= include('./_about.md') %>
 
@@ -40,7 +42,7 @@ Content-Type: application/json
   "device": "my-device-name"
 }</code></pre>
     <ul>
-        <li>The <code>device</code> parameter is only needed if <a href="/tokens/refresh-token">requesting a <dfn data-key="refresh-token">Refresh Token</dfn></a> by passing the <code>offline_access</code> <dfn data-key="scope">scope</dfn>.</li>
+        <li>The <code>device</code> parameter is only needed if <a href="/tokens/concepts/refresh-tokens">requesting a <dfn data-key="refresh-token">Refresh Token</dfn></a> by passing the <code>offline_access</code> <dfn data-key="scope">scope</dfn>.</li>
     </ul>
     </div>
     <div id="request-oidc" class="tab-pane">
@@ -100,7 +102,7 @@ Pragma: no-cache
     "id_token": "eyJ..."
 }</code></pre>
     <ul>
-        <li>The returned Access Token is valid for calling the <a href="/api/authentication#get-user-info">/userinfo endpoint</a> (provided that the API specified by the <code>audience</code> param uses <code>RS256</code> as signing algorithm) and optionally the resource server specified by the <code>audience</code> parameter.</li>
+        <li>The returned Access Token is valid for calling the <a href="/api/authentication#get-user-info">/userinfo endpoint</a> (provided that the API specified by the <code>audience</code> param uses <code>RS256</code> as <a href="/tokens/concepts/signing-algorithms">signing algorithm</a>) and optionally the resource server specified by the <code>audience</code> parameter.</li>
         <li>The ID Token will be forcibly signed using RS256 if requested by a <a href="/applications/concepts/app-types-confidential-public#public-applications">public application</a>.</li>
         <li>A Refresh Token will be returned only if the <code>offline_access</code> scope was granted.</li>
     </ul>
@@ -144,7 +146,7 @@ Pragma: no-cache
 }</code></pre>
         <ul>
             <li>The ID Token will be forcibly signed using RS256 if requested by a <a href="/api-auth/application-types">public application</a>.</li>
-            <li>The <code>favorite_color</code> claim must be namespaced and added through a rule.</li>
+            <li>The <code>favorite_color</code> claim must be <a href="/tokens/guides/create-namespaced-custom-claims">namespaced</a> and added through a rule.</li>
         </ul>
     </div>
   </div>
@@ -180,7 +182,7 @@ Pragma: no-cache
     "scope": "openid email"
 }</code></pre>
         <ul>
-            <li>The returned Access Token is a JWT valid for calling the <a href="/api/authentication#get-user-info">/userinfo endpoint</a> (provided that the API specified by the <code>audience</code> param uses <code>RS256</code> as signing algorithm) as well as the resource server specified by the <code>audience</code> parameter.</li>
+            <li>The returned Access Token is a JWT valid for calling the <a href="/api/authentication#get-user-info">/userinfo endpoint</a> (provided that the API specified by the <code>audience</code> param uses <code>RS256</code> as <a href="/tokens/concepts/signing-algorithms">signing algorithm</a>) as well as the resource server specified by the <code>audience</code> parameter.</li>
             <li>Note that an opaque Access Token could still be returned if /userinfo is the only specified audience.</li>
         </ul>
     </div>
@@ -191,6 +193,6 @@ Pragma: no-cache
 
 The Auth0 password realm grant is not defined by standard OIDC, but it is suggested as an alternative to the legacy resource owner endpoint because it supports the Auth0-specific `realm` parameter. The [standard OIDC grant is also supported](/api-auth/tutorials/password-grant) when using OIDC authentication.
 
-## Further reading
+## Keep reading
 
 <%= include('./_index.md') %>

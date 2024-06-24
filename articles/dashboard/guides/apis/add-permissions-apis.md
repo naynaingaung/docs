@@ -30,9 +30,28 @@ By default, any user of any application can ask for any permission defined here.
 
 ![Delete Permissions](/media/articles/authorization/api-def-permissions.png)
 
+## Reserved names
+
+The following permission names are reserved and cannot be set as custom API permissions:
+
+* address
+* created_at
+* email
+* email_verified
+* family_name
+* given_name
+* identities
+* name
+* nickname
+* offline_access
+* openid
+* phone
+* picture
+* profile
+
 ## Keep reading
 
 - [Customize the Consent Prompt](/scopes/current/guides/customize-consent-prompt)
 - [Represent Multiple APIs Using a Single Logical API in Auth0](/api-auth/tutorials/represent-multiple-apis)
 - [Role-Based Access Control (RBAC)](/authorization/concepts/rbac)
-- [Enable Role-Based Access Control for APIs](/authorization/guides/enable-rbac)
+- [Enable Role-Based Access Control for APIs](/dashboard/guides/apis/enable-rbac)

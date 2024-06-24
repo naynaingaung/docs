@@ -19,7 +19,7 @@ useCase:
 # Lock Android: Getting Started
 
 ::: warning
-Username/Email & Password authentication from native applications is disabled by default for new tenants as of 8 June 2017. Users are encouraged to use <dfn data-key="universal-login">Universal Login</dfn> and perform Web Authentication instead. If you still want to proceed you'll need to enable the Password Grant Type on your dashboard first. See [Application Grant Types](/applications/concepts/application-grant-types) for more information.
+Auth0 encourages the use of [web authentication via Universal Login](/guides/login/universal-vs-embedded) rather than native username/password authentication whenever possible.
 :::
 
 <dfn data-key="lock">Lock</dfn> for Android can integrate into your native Android apps to provide a beautiful way to log your users in and to sign them up in your app. It provides support for social identity providers such as Facebook, Google, or Twitter, as well as enterprise providers such as Active Directory.
@@ -115,7 +115,7 @@ Add the `LockActivity`.
   android:label="@string/app_name"
   android:launchMode="singleTask"
   android:screenOrientation="portrait"
-  android:theme="@style/MyLock.Theme"/>
+  android:theme="@style/Lock.Theme"/>
 ```
 
 ::: note
@@ -130,7 +130,7 @@ In case you are using an older version of Lock the **intent-filter** must be add
   android:label="@string/app_name"
   android:launchMode="singleTask"
   android:screenOrientation="portrait"
-  android:theme="@style/MyLock.Theme">
+  android:theme="@style/Lock.Theme">
     <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -193,7 +193,7 @@ private LockCallback callback = new AuthenticationCallback() {
 ```
 
 ::: note
-The results of the AuthenticationCallback are in a `credentials` object. This object contains the tokens that you will require for authentication related operations in your app; see the [Tokens documentation](/tokens) for more specifics.
+The results of the AuthenticationCallback are in a `credentials` object. This object contains the tokens that you will require for authentication related operations in your app; see [Tokens](/tokens) for more specifics.
 :::
 
 ### Lock.Builder
@@ -280,7 +280,7 @@ As this library depends on `Auth0.Android`, you should keep the files up to date
 
 ## Lock configuration
 
-For a full list of Lock's configuration options, check out the [Lock for Android Configuration Reference](/libraries/lock-android/v2/configuration). Also, for users of v1 migrating to v2, read the [Migration Guide](/libraries/lock-android/v2/migration-guide) to see what options have changed.
+For a full list of Lock's configuration options, check out the [Lock for Android Configuration Reference](/libraries/lock-android/v2/configuration).
 
 ## Error messages
 

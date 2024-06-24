@@ -23,11 +23,11 @@ You can see the status of a region or expand a region and see the status of indi
 
 ## Subscribe to status updates
 
-* On the [Auth0 Status](https://status.auth0.com) page, click **Subscribe to Updates** to get updates for specific regions and services to tailor the notices you receive. 
+On the [Auth0 Status](https://status.auth0.com) page, choose your region and environment and click **Subscribe to Updates** to get updates. You can choose from two options to view status: 
 
 * Follow [@auth0status](https://twitter.com/auth0status) on Twitter to get the latest status updates.
 
-* Subscribe to the Auth0 Atom feed to get status updates that affect your tenant.
+* Subscribe to the Auth0 Atom feed to get status updates that affect your tenant. Using an RSS feed aggregator of your choice (such as https://feeder.co/reader), use the following RSS feed URL to view the status of your tenant. Replace `YOUR-TENANT` with your tenant name.
 
    `status.auth0.com/feed?domain={YOUR-TENANT}.auth0.com`
 
@@ -38,7 +38,6 @@ Current and historical Auth0 uptime reports are available at [Auth0 Uptime](http
 ## Keep reading
 
 * [Check External Services Status](/monitoring/guides/check-external-services)
-* [Check Auth0 Authentication and Supporting Services](/monitoring/guides/test-testall-endpoints)
 * [Monitor Auth0 Using System Center Operations Manager](/monitoring/guides/monitor-using-SCOM)
 * [Monitor Applications](/monitoring/guides/monitor-applications)
 * [Troubleshooting](/troubleshoot)

@@ -1,7 +1,5 @@
 <!-- markdownlint-disable -->
-
 # Login
-
 ## Social with Provider's Access Token
 
 ```http
@@ -77,9 +75,6 @@ Given the social provider's <dfn data-key="access-token">Access Token</dfn> and 
 | `connection` <br/><span class="label label-danger">Required</span> | The name of an identity provider configured to your app. |
 | <dfn data-key="scope">`scope`</dfn> | Use `openid` to get an ID Token, or `openid profile email` to include user information in the ID Token. If null, only an Access Token will be returned. |
 
-### Test with Postman
-
-<%= include('../../../_includes/_test-with-postman') %>
 
 ### Remarks
 
@@ -91,13 +86,11 @@ Given the social provider's <dfn data-key="access-token">Access Token</dfn> and 
 
 For the complete error code reference for this endpoint refer to [Errors > POST /oauth/access_token](#post-oauth-access_token).
 
-### More Information
+### Learn More
 
 - [Call an Identity Provider API](/tutorials/calling-an-external-idp-api)
-
 - [Identity Provider Access Tokens](/tokens/overview-idp-access-tokens)
-
-- [Add scopes/permissions to call Identity Provider's APIs](/tutorials/adding-scopes-for-an-external-idp)
+- [Add scopes/permissions to call Identity Provider's APIs](/connections/adding-scopes-for-an-external-idp)
 
 ## Database/AD/LDAP (Active)
 
@@ -180,24 +173,9 @@ Use this endpoint for API-based (active) authentication. Given the user credenti
 | `password` <br/><span class="label label-danger">Required</span> | Password of the user to login |
 | `connection` <br/><span class="label label-danger">Required</span> | The name of the connection to use for login |
 | <dfn data-key="scope">`scope`</dfn> | Set to `openid` to retrieve also an ID Token, leave null to get only an Access Token |
-| `grant_type` <br/><span class="label label-danger">Required</span> | Set to `password` to authenticate using username/password or `urn:ietf:params:oauth:grant-type:jwt-bearer` to authenticate using an ID Token (used to [Authenticate users with Touch ID](/connections/passwordless/ios-touch-id-swift)) |
+| `grant_type` <br/><span class="label label-danger">Required</span> | Set to `password` to authenticate using username/password or `urn:ietf:params:oauth:grant-type:jwt-bearer` to authenticate using an ID Token instead of username/password, in [Touch ID](/libraries/lock-ios/touchid-authentication) scenarios. |
 | `device` | String value. Required when `grant_type` is `urn:ietf:params:oauth:grant-type:jwt-bearer` |
 | `id_token` | Used to authenticate using a token instead of username/password, in [Touch ID](/libraries/lock-ios/touchid-authentication) scenarios. Required when `grant_type` is `urn:ietf:params:oauth:grant-type:jwt-bearer` |
-
-### Test with Postman
-
-<%= include('../../../_includes/_test-with-postman') %>
-
-### Test with Authentication API Debugger
-
-<%= include('../../../_includes/_test-this-endpoint') %>
-
-1. At the *Configuration* tab, set the fields **Application** (select the application you want to use for the test) and **Connection** (the name of the social connection to use).
-
-1. Copy the <dfn data-key="callback">**Callback URL**</dfn> and set it as part of the **Allowed Callback URLs** of your [Application Settings](${manage_url}/#/applications).
-
-1. At the *OAuth2 / OIDC* tab, set **Username** and **Password**. Click **Resource Owner Endpoint**.
-
 
 ### Remarks
 
@@ -212,12 +190,8 @@ Use this endpoint for API-based (active) authentication. Given the user credenti
 
 For the complete error code reference for this endpoint, refer to [Errors > POST /oauth/ro](#post-oauth-ro).
 
-### More Information
+### Learn More
 
 - [Database Identity Providers](/connections/database)
-
-- [Rate Limits on User/Password Authentication](/connections/database/rate-limits)
-
+- [Rate Limits on User/Password Authentication](/policies/rate-limit-policy/database-connections-rate-limits)
 - [Active Directory/LDAP Connector](/connector)
-
-- [Authenticate users with Touch ID](/connections/passwordless/ios-touch-id-swift)

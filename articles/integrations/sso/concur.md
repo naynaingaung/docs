@@ -9,8 +9,11 @@ topics:
 contentType: how-to
 useCase: integrate-saas-sso
 ---
-
-<%= include('./_template', {
-  service: "Concur",
-  img: "concur"
-}) %>
+<%= include('../../../snippets/sso-integrations/concur/0') %> 
+<%= include('../../../snippets/sso-integrations/concur/1') %> 
+<%= include('../../../snippets/sso-integrations/concur/2') %> 
+<%= include('../../../snippets/sso-integrations/concur/3') %> 
+<%= include('../../../snippets/sso-integrations/concur/4') %> 
+<%= include('../../../snippets/sso-integrations/concur/5') %> 
+<%= include('../../../snippets/sso-integrations/concur/6') %>
+<%= include('../../../snippets/sso-integrations/concur/7') %>

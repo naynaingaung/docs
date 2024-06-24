@@ -25,19 +25,7 @@ Android API version 15 or newer is required.
 
 ## Installation
 
-Auth0.Android is available through [Gradle](https://gradle.org/). To install it, simply add the following line to your `build.gradle` file:
-
-```gradle
-dependencies {
-    compile "com.auth0.android:auth0:1.+"
-}
-```
-
-::: note
-You can check for the latest version on the repository [Readme](https://github.com/auth0/auth0.android#installation), in [Maven](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22auth0%22%20g%3A%22com.auth0.android%22), or in [JCenter](https://bintray.com/auth0/android/auth0).
-:::
-
-After adding your Gradle dependency, make sure to remember to sync your project with Gradle files.
+<%= include('../../quickstart/native/android/_includes/_gradle.md') %>
 
 ## Permissions
 
@@ -75,8 +63,6 @@ Auth0 account = new Auth0("${account.clientId}", "${account.namespace}");
 account.setOIDCConformant(true);
 //Use the account in the API applications
 ```
-
-<dfn data-key="passwordless">Passwordless authentication</dfn> **cannot be used** with this flag set to `true`. For more information, please see the [OIDC adoption guide](/api-auth/tutorials/adoption).
 
 ## Authentication via Universal Login
 
@@ -155,7 +141,7 @@ Finally, don't forget to add the internet permission:
 In versions 1.8.0 or lower of Auth0.Android you had to define the **intent-filter** inside your activity to capture the authentication result in the `onNewIntent` method and then call `WebAuthProvider.resume()` with the received data. The intent-filter declaration and resume call are no longer required for versions greater than 1.8.0, as it's now done internally by the library for you.
 :::
 
-Now, let's authenticate a user by presenting the universal [login page](hosted-pages/login):
+Now, let's authenticate a user by presenting the universal [login page](/universal-login):
 
 ```java
 WebAuthProvider.login(account)

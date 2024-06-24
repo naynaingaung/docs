@@ -39,10 +39,10 @@ Search&nbsp;Field | Data&nbsp;Type | Description
 `updated_at` | date&nbsp;time | The timestamp of when the user's profile was last updated/modified.
 `last_login` | date&nbsp;time | The timestamp of when the user last logged in. In case you are this property from inside a [Rule](/rules) using the `user` object, its value will be the one associated with the login that triggered the rule (since rules execute after the actual login).
 `last_ip` | text (valid IP&nbsp;address) | The IP address associated with the user's last login.
-`blocked` | boolean | The `true/false` value indicating if the user has been blocked.
+`blocked` | boolean | The `true` or `false` value indicating if the user has been blocked. Note: `true` *only* brings back users who are blocked via the Admin Dashboard and Management API; it does not bring back users blocked by brute force anomaly detection.
 `email.domain` | text | The domain part of the user's email.
 
-[User metadata](/users/concepts/overview-user-metadata) fields may be used with:
+[Metadata](/users/concepts/overview-user-metadata) fields may be used with:
     
 * Boolean
 * Numeric: (integer or double)
@@ -163,5 +163,4 @@ Range and wildcard searches are not available on user metadata fields.
 * [Sort Search Results](/users/search/v3/sort-search-results)
 * [View Search Results by Page](/users/search/v3/view-search-results-by-page)
 * [Bulk User Exports](/users/guides/bulk-user-exports)
-* [Metadata Field Name Rules](/users/references/metadata-field-name-rules)
 * [Search Best Practices](/best-practices/search-best-practices)

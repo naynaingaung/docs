@@ -1,5 +1,4 @@
 ---
-title: Introducing OIDC Conformant Authentication
 description: An overview of the OIDC Conformant authentication flows, why these changes were made and how you can adopt them.
 toc: true
 topics:
@@ -10,7 +9,7 @@ useCase:
   - secure-api
   - call-api
 ---
-# Introducing OIDC Conformant Authentication
+# OIDC-Conformant Authentication Overview
 
 **Released Date**: May 10, 2017
 
@@ -64,7 +63,7 @@ For more information on the Client Credentials grant, refer to [How to Implement
 
 ### Calling APIs with Access Tokens
 
-Historically, protecting resources on your API has been accomplished using ID Tokens issued to your users after they authenticate in your applications. From now on, you should only use Access Tokens when calling APIs. ID Tokens should only be used by the application to verify that the user is authenticated and get basic user information. The main reason behind this change is security. For details, refer to [Why you should always use Access Tokens to secure an API](/api-auth/why-use-access-tokens-to-secure-apis).
+Historically, protecting resources on your API has been accomplished using ID Tokens issued to your users after they authenticate in your applications. From now on, you should only use Access Tokens when calling APIs. ID Tokens should only be used by the application to verify that the user is authenticated and get basic user information. The main reason behind this change is security. For details, refer to [Tokens](/tokens).
 
 ::: note
 For more information, refer to [Calling your APIs with Auth0 tokens](/api-auth/tutorials/adoption/api-tokens).
@@ -74,12 +73,12 @@ For more information, refer to [Calling your APIs with Auth0 tokens](/api-auth/t
 
 Historically, you were able to define and request arbitrary application-specific claims. From now on, your application can request any of the [standard OpenID Connect (OIDC) scopes](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims), as [defined by the OIDC Specification](https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims), or any <dfn data-key="scope">scopes</dfn> supported by your [API](/apis).
 
-In order to add custom claims to ID Tokens or Access Tokens, they must [conform to a namespaced format](/api-auth/tutorials/adoption/scope-custom-claims) to avoid possible collisions with standard OIDC claims.
+In order to add custom claims to ID Tokens or Access Tokens, they must [conform to a namespaced format](/tokens/guides/create-namespaced-custom-claims) to avoid possible collisions with standard OIDC claims.
 
 To customize the tokens, use Hooks for the Client Credentials Flow, and Rules for the rest of the flows:
 - __Client Credentials Flow__: [Customize Tokens using Hooks](/flows/guides/client-credentials/call-api-client-credentials#customize-tokens)
 - __Trusted App Flow__: [Customize Tokens using Rules](/api-auth/grant/password#customizing-the-returned-tokens)
-- __Single-Page Flow__: [Customize Tokens using Rules](/flows/guides/implicit/call-api-implicit#customize-tokens)
+- __Single-Page Flow__: [Customize Tokens using Rules](/flows/guides/implicit/call-api-auth-code-pkce#customize-tokens)
 - __Regular Web App Flow__: [Customize Tokens using Rules](/flows/guides/auth-code/call-api-auth-code#customize-tokens)
 - __Native/Mobile Flow__: [Customize Tokens using Rules](/flows/guides/auth-code-pkce/call-api-auth-code-pkce#customize-tokens)
 
@@ -134,7 +133,7 @@ Some changes were introduced in the implementation of Authorization Code grant:
 
 - The `device` request parameter has been removed.
 - The `audience` request parameter has been introduced. This denotes the target API for which the token should be issued.
-- The returned Access Token is a [JWT](/jwt), valid for calling the [/userinfo endpoint](/api/authentication#get-user-info) and the API specified by the `audience` parameter.
+- The returned Access Token is a [JWT](/tokens/concepts/jwts), valid for calling the [/userinfo endpoint](/api/authentication#get-user-info) and the API specified by the `audience` parameter.
 - A <dfn data-key="refresh-token">Refresh Token</dfn> will be returned only if the `offline_access` scope was granted.
 
 ::: note
@@ -150,7 +149,7 @@ Some changes were introduced in the implementation of Implicit grant:
 - The `response_type` request parameter indicates whether we want to receive both an Access Token and ID Token. If using `response_type=id_token`, we will return only an ID Token.
 - Refresh Tokens are not allowed. [Use `prompt=none` instead](/api-auth/tutorials/silent-authentication).
 - The <dfn data-key="nonce">`nonce`</dfn> request parameter must be a [cryptographically-secure random string](/api-auth/tutorials/nonce). After validating the ID Token, the application must [validate the nonce to mitigate replay attacks](/api-auth/tutorials/nonce). Requests made without a `nonce` parameter will be rejected.
-- The returned Access Token is a [JWT](/jwt), valid for calling the [/userinfo endpoint](/api/authentication#get-user-info) and the API specified by the `audience` parameter.
+- The returned Access Token is a [JWT](/tokens/concepts/jwts), valid for calling the [/userinfo endpoint](/api/authentication#get-user-info) and the API specified by the `audience` parameter.
 - ID Tokens will be signed asymmetrically using `RS256`.
 
 ::: note
@@ -165,7 +164,7 @@ Some changes were introduced in the implementation of Resource Owner Password gr
 - The `audience` request parameter has been introduced. This denotes the target API for which the token should be issued.
 - The endpoint to execute token exchanges is [/oauth/token](/api/authentication#resource-owner-password).
 - [Auth0's own grant type](/api-auth/tutorials/password-grant#realm-support) is used to authenticate users from a specific connection (`realm`). The [standard OIDC password grant](/api-auth/tutorials/password-grant) is also supported, but it does not accept Auth0-specific parameters such as `realm`.
-- The returned Access Token is a [JWT](/jwt), valid for calling the [/userinfo endpoint](/api/authentication#get-user-info) and the API specified by the `audience` parameter.
+- The returned Access Token is a [JWT](/tokens/concepts/jwts), valid for calling the [/userinfo endpoint](/api/authentication#get-user-info) and the API specified by the `audience` parameter.
 - The ID Token will be forcibly signed using `RS256` if requested by a [public application](/applications/concepts/app-types-confidential-public#public-applications).
 - A Refresh Token will be returned only if the `offline_access` scope was granted.
 
@@ -184,13 +183,11 @@ For more information, refer to [Resource Owner Password Credentials exchange](/a
 
 Given that [ID Tokens should no longer be used as API tokens](/api-auth/tutorials/adoption/api-tokens) and that [Refresh Tokens should be used only at the token endpoint](/api-auth/tutorials/adoption/refresh-tokens), this endpoint is now considered deprecated.
 
-At the moment there is no OIDC-compliant mechanism to obtain third-party API tokens. In order to facilitate a gradual migration to the new authentication pipeline, delegation can still be used to obtain third-party API tokens. This will be deprecated in future releases.
-
 ### Passwordless
 
 Our new implementation only supports an [OIDC-conformant](/api-auth/tutorials/adoption) <dfn data-key="passwordless">passwordless</dfn> authentication mechanism when using web applications (with Lock.js or auth0.js).
 
-Native applications need to use Universal Login (with an Auth0-hosted login page). Customers can use the <dfn data-key="lock">Lock</dfn> (Passwordless) template in the [Dashboard](${manage_url}/#/login) under **Hosted Pages -> Login -> Default Templates**, or customize it to fit specific requirements.
+Native applications need to use Universal Login (with an Auth0-hosted login page). Customers can use the <dfn data-key="lock">Lock</dfn> (Passwordless) template in the [Dashboard](${manage_url}/#/login_settings) under **Universal Login -> Login -> Default Templates**, or customize it to fit specific requirements.
 
 ### Other Authentication API endpoints
 
@@ -251,7 +248,7 @@ To use the `audience` parameter instead, configure your app to send it when init
     <tr>
       <th><strong>Add arbitrary claims in Tokens</strong></th>
       <td>Supported</td>
-      <td>Supported. The namespaced format has to be used.</td>
+      <td>Supported. The <a href="/tokens/guides/create-namespaced-custom-claims">namespaced format</a> has to be used.</td>
     </tr>
     <tr>
       <th><strong>SSO</strong></th>
@@ -323,10 +320,8 @@ should be used instead with <code>"grant_type": "refresh_token"</code></td>
   </tbody>
 </table>
 
-## Keep Reading
+## Keep reading
 
-::: next-steps
 * [API Authorization index](/api-auth)
-* [Why you should use Access Tokens to secure APIs?](/api-auth/why-use-access-tokens-to-secure-apis)
-* [Tokens used by Auth0](/tokens)
-:::
+* [Tokens](/tokens)
+

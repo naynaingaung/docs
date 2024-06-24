@@ -2,6 +2,7 @@
 title: Legacy Lock API Deprecation
 description: This article covers the Legacy Lock API deprecation and gives direction as to migration paths and changes required.
 toc: true
+public: false
 contentType:
   - concept
   - how-to
@@ -11,7 +12,7 @@ useCase:
 ---
 # Legacy Lock API Deprecation
 
-On April 4, 2018, Auth0 [publicly disclosed a vulnerability](https://auth0.com/blog/managing-and-mitigating-security-vulnerabilities-at-auth0/). That vulnerability resulted in the deprecation of two endpoints in the Auth0 API, and the libraries and SDKs which used those endpoints. These endpoints were disabled on **July 16, 2018**, beginning a [brief grace period](https://community.auth0.com/t/soft-removal-of-legacy-lock-api/12949) in which usage of the endpoints could be re-enabled on a per-tenant basis until a migration could be completed. The endpoints have been removed from service as of **August 6, 2018**.
+On April 4, 2018, Auth0 publicly disclosed a vulnerability. That vulnerability resulted in the deprecation of two endpoints in the Auth0 API, and the libraries and SDKs which used those endpoints. These endpoints were disabled on **July 16, 2018**, beginning a [brief grace period](https://community.auth0.com/t/soft-removal-of-legacy-lock-api/12949) in which usage of the endpoints could be re-enabled on a per-tenant basis until a migration could be completed. The endpoints have been removed from service as of **August 6, 2018**.
 
 The purpose of this guide is to help you to select the best migration path for your application(s) if you are impacted by the deprecation. 
 
@@ -27,7 +28,7 @@ If you do not use the above libraries and do not specifically call the above end
 
 ### If you already use Universal Login / Hosted Login Page
 
-Applications which log users in via <dfn data-key="universal-login">Universal Login</dfn> through an Auth0 hosted page are not _required_ to update the version of Lock or Auth0.js that they use _inside_ that login page (if you have customized your login page in the [Dashboard](${manage_url}/#/login_page). However, the use of the newest library versions is strongly recommended, even in the Universal Login Page. For those who have not customized their login page, the Lock v11 widget is already in use and no further action is required.
+Applications which log users in via <dfn data-key="universal-login">Universal Login</dfn> through an Auth0-hosted page are not _required_ to update the version of Lock or Auth0.js that they use _inside_ that login page (if you have customized your login page in the [Dashboard](${manage_url}/#/login_page). However, the use of the newest library versions is strongly recommended, even in the Universal Login Page. For those who have not customized their login page, the Lock v11 widget is already in use and no further action is required.
 
 ### If you use embedded login
 
@@ -95,12 +96,6 @@ Embedded login (embedding Lock or a custom authentication UI) should be used onl
 
 <ul class="topic-links">
   <li>
-    <i class="icon icon-budicon-715"></i><a href="/libraries/lock/v11/migration-guide"> Lock v11 Migration Guide</a>
-    <p>
-      This document presents an overview of the updates to Lock in version 11 and points to technology and version-specific tutorials to help you with your migration.
-    </p>
-  </li>
-  <li>
     <i class="icon icon-budicon-715"></i><a href="/libraries/auth0js/v9/migration-guide"> Auth0.js v9 Migration Guide</a>
     <p>
       This document presents an overview of the updates to Auth0.js in version 9 and points to technology and version-specific tutorials to help you with your migration.
@@ -124,7 +119,7 @@ Once a user has been authenticated, an application may wish to retrieve informat
 
 For customers who are using the [/tokeninfo](/api/authentication#get-token-info) endpoint, this endpoint is being replaced with the /userinfo endpoint. Customers should migrate to use the /userinfo endpoint instead of /tokeninfo. The /userinfo endpoint is the only one that will be maintained going forward and is the only endpoint for user information that is supported with the [custom domains](/custom-domains) feature.
 
-As explained in the /userinfo endpoint docs entry, /userinfo obtains information using the Management API and therefore requires an <dfn data-key="access-token">Access Token</dfn> (obtained during login) instead of the [ID Token](/tokens/id-token) used by /tokeninfo.
+As explained in the /userinfo endpoint docs entry, /userinfo obtains information using the Management API and therefore requires an <dfn data-key="access-token">Access Token</dfn> (obtained during login) instead of the [ID Token](/tokens/concepts/id-tokens) used by /tokeninfo.
 
 Note also that the [/userinfo response](/api-auth/tutorials/adoption/scope-custom-claims) may vary based on <dfn data-key="scope">scopes</dfn> requested and the value of the [OIDC Conformant](/api-auth/tutorials/adoption/oidc-conformant) setting in the [Dashboard](${manage_url}) under **Applications > (Your Application) > Settings > Advanced Settings**. In that case, application code might need adjusted to handle the slightly altered response format.
 
@@ -146,7 +141,7 @@ The `getSSOData()` and `checkSession()` functions should only be used from a Sin
 
 ##### getSSOData()
 
-* The Auth0.js v9 `getSSOData()` function will continue to work, but it now [behaves differently than in the past](/libraries/auth0js/v9/migration-v8-v9#review-calls-to-getssodata-).
+* The Auth0.js v9 `getSSOData()` function will continue to work, but it now behaves differently than in the past.
 * In Auth0.js v9, `getSSOData()` will check if a user has an existing session and perform a further check to determine if the user is the same one as in the last interactive authentication transaction. This supports Lock’s feature of showing the last logged-in user to facilitate subsequent logins.
 * Invoking the `getSSOData()` function will now trigger a call to the [/authorize](/api/authentication#authorize-application) endpoint, which will in turn result in the execution of [rules](/rules).
 
@@ -160,7 +155,7 @@ This was previously done with `getSSOData()`. The `getSSOData()` function perfor
 
 In "web applications", the backend typically has a session for the user. Over time, the application session may expire, in which case the application should renew the session. The application backend should invoke a call to the [/authorize](/api/authentication#authorize-application) endpoint to get a new token. If the Authorization Server (Auth0 in this case) still has a session for the user, the user will not have to re-enter their credentials to log in again. If Auth0 no longer has a session for the user, the user has to log in again.
 
-Customers with web applications which call the API from their backend should use this approach. Specifically, they should [call /oauth/token](/tokens/refresh-token/current#use-a-refresh-token) to renew their token.
+Customers with web applications which call the API from their backend should use this approach. Specifically, they should [call /oauth/token](/tokens/guides/use-refresh-tokens) to renew their token.
 
 ### How to log users out
 
@@ -177,6 +172,4 @@ The solution for the Kerberos case is to [migrate to Universal Login](#1-migrate
 
 ## Troubleshooting
 
-### How to tell if you have deprecated usage
-
-Please take a look at the [Deprecation Error Reference](/errors/deprecation-errors) to assist with verifying that your application does, or does not, use deprecated features.
+See [Check Deprecation Errors](/troubleshoot/guides/check-deprecation-errors) for more information on deprecation-related errors.

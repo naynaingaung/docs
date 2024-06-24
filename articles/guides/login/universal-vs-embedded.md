@@ -34,7 +34,7 @@ In this article, we will evaluate the pros and cons of these two options and see
 
 ![Universal vs Embedded login UX](/media/articles/guides/login/centralized-embedded-ux.jpg)
 
-- **Central Features Management**: When you use Universal Login with Auth0, you can turn on and off features across all your apps, using the Dashboard. An example is [Multi-factor Authentication](/multifactor-authentication) which you can enable using the toggles located at the [Dashboard > Multi-factor Auth](${manage_url}/#/guardian) page. These changes will be automatically available to all your registered apps.
+- **Central Features Management**: When you use Universal Login with Auth0, you can turn on and off features across all your apps, using the Dashboard. An example is [Multi-factor Authentication](/mfa) which you can enable using the toggles located at the [Dashboard > Multi-factor Auth](${manage_url}/#/mfa) page. These changes will be automatically available to all your registered apps.
 
 - **User Experience**: In the past, an argument could be made that the user experience with embedded login was better because it did not require redirecting users to another subdomain. However, users are getting increasingly familiar with the process of being redirected to another subdomain to log in. As a result, they don't find the process disruptive to their experience. Think about this, when you try to access your Gmail, if you are not logged in, you get redirected to the Google Accounts subdomain in order to log in. Do you get frustrated with that? You probably don't even notice it.
 
@@ -42,9 +42,9 @@ In this article, we will evaluate the pros and cons of these two options and see
 
 ## Universal Login with Auth0
 
-For most situations, we recommend using a Universal Login strategy, where Auth0 will show a [login page](/hosted-pages/login) if authentication is required. You can customize your login page using the [Dashboard](${manage_url}/#/login_page).
+For most situations, we recommend using a Universal Login strategy, where Auth0 will show a [login page](/universal-login) if authentication is required. You can customize your login page using the [Dashboard](${manage_url}/#/login_page).
 
-You can use **Auth0's Custom Domains** in order to persist the same domain across the login page and the app. This way the redirect to the login page will be transparent to your users since the domain will not change. For more details refer to [Custom Domains Overview](/custom-domains).
+You can use **Auth0's Custom Domains** in order to persist the same domain across the login page and the app. This way the redirect to the login page will be transparent to your users since the domain will not change. For more details, see [Custom Domains](/custom-domains).
 
 Whenever your app triggers an authentication request, the user will be redirected to the login page in order to authenticate. This will create a cookie. In future authentication requests, Auth0 will check for this cookie, and if it is present the user will not be redirected to the login page. They will see the page only when they need to actually log in. This is the easiest way to implement SSO.
 
@@ -69,22 +69,20 @@ In addition, if you have not enabled [custom domains](/custom-domains), the end 
 
 ### Security risks
 
-Universal Login is more secure than embedded login. Authentication takes place over the same domain, eliminating cross-origin requests. Cross-origin authentication is inherently more dangerous. Collecting user credentials in an application served from one origin and then sending them to another origin can present certain security vulnerabilities. [Phishing attacks](https://auth0.com/blog/all-you-need-to-know-about-the-google-docs-phishing-attack/) are more likely, as are [man-in-the-middle attacks](/security/common-threats#man-in-the-middle-mitm-attacks). Universal Login does not send information between origins, thereby negating cross-origin concerns.
+Universal Login is more secure than embedded login. Authentication takes place over the same domain, eliminating cross-origin requests. Cross-origin authentication is inherently more dangerous. Collecting user credentials in an application served from one origin and then sending them to another origin can present certain security vulnerabilities. Phishing attacks are more likely, as are [man-in-the-middle attacks](/security/common-threats#man-in-the-middle-mitm-attacks). Universal Login does not send information between origins, thereby negating cross-origin concerns.
 
 Embedded user agents are unsafe for third parties, including the authorization server itself. If an embedded login is used, the app has access to both the authorization grant and the user's authentication credentials. As a consequence, this data is left vulnerable to recording or malicious use. Even if the app is trusted, allowing it to access the authorization grant as well as the user's **full credentials** is unnecessary. This violates the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege) and increases the potential for attack.
 
 :::note
-As a matter of fact, Google no longer supports an embedded approach when implementing OAuth. For more information on this, refer to [Google Blocks OAuth Requests Made via embedded browsers](https://auth0.com/blog/google-blocks-oauth-requests-from-embedded-browsers/). 
+Google no longer supports an embedded approach when implementing OAuth.
 :::
 
-Furthermore, according to the [Internet Engineering Task Force (IETF)](https://www.ietf.org/), authorization requests from native apps should only be made through external user agents, primarily the user's browser. Using the browser to make native app authorization requests results in better security. When embedded agents are used, the app has access to the OAuth authorization grant as well as the user's credentials, leaving this data vulnerable to recording or malicious use. For more info refer to [OAuth 2.0 Best Practices for Native Apps](https://auth0.com/blog/oauth-2-best-practices-for-native-apps/).
+Furthermore, according to the [Internet Engineering Task Force (IETF)](https://www.ietf.org/), authorization requests from native apps should only be made through external user agents, primarily the user's browser. Using the browser to make native app authorization requests results in better security. When embedded agents are used, the app has access to the OAuth authorization grant as well as the user's credentials, leaving this data vulnerable to recording or malicious use.
 
 ## Keep reading
 
 :::next-steps
 - [Migrating from Embedded to Universal Login](/guides/login/migration-embedded-universal)
 - [Browser-Based vs. Native Login Flows on Mobile Devices](/design/browser-based-vs-native-experience-on-mobile)
-- [Authentication Provider Best Practices: Universal Login](https://auth0.com/blog/authentication-provider-best-practices-centralized-login/)
-- [OAuth 2.0 Best Practices for Native Apps](https://auth0.com/blog/oauth-2-best-practices-for-native-apps/)
 - [Modernizing OAuth interactions in Native Apps for Better Usability and Security](https://developers.googleblog.com/2016/08/modernizing-oauth-interactions-in-native-apps.html)
 :::

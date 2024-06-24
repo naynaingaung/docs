@@ -1,6 +1,7 @@
 ---
 title: Call Your API from an Input-Constrained Device
 description: Everything you need to know to call your API from your input-constrained device. For use with native apps.
+public: false
 template: microsite
 topics:
   - authorization
@@ -55,6 +56,7 @@ To implement the Device Authorization Flow, you can follow our tutorial: [Call Y
   * [Auth0 Backend/API Quickstarts](/quickstart/backend)
   * [Call Your API Using the Device Authorization Flow](/flows/guides/device-auth/call-api-device-auth)
   * [Change scopes and add custom claims to tokens using hooks](/api-auth/tutorials/client-credentials/customize-with-hooks)
+  * [Token Storage](/tokens/concepts/token-storage)
 :::
 
 ::: references
@@ -64,8 +66,7 @@ To implement the Device Authorization Flow, you can follow our tutorial: [Call Y
 :::
 
 ::: concepts  
-  * [Access Tokens](/tokens/overview-access-tokens)
-  * [Where to store tokens](/security/store-tokens)
+  * [Access Tokens](/tokens/concepts/access-tokens)
 :::
 
 ::::

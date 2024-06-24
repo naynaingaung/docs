@@ -16,13 +16,13 @@ See [Setting Up Multiple Environments](/dev-lifecycle/setting-up-env) for inform
 
 ## Use JSON Web Tokens (JWT) with client-side applications
 
-Because [JSON Web Tokens (JWT)](/jwt) are stateless (that is, the app that consumes them cares only about its contents, not any of its previous states), this is one of the easiest scenarios to test locally.
+Because [JSON Web Tokens (JWT)](/tokens/concepts/jwts) are stateless (that is, the app that consumes them cares only about its contents, not any of its previous states), this is one of the easiest scenarios to test locally.
 
 You can obtain JWTs for testing using any of the following methods:
 
 1. Create a test user for a database [connection](/identityproviders), and programmatically log this user in. Essentially, you are using the recommended process for [calling an API using a highly-trusted application](/api-auth/grant/password). For detailed implementation instructions, see [Execute the Resource Owner Password Grant](/api-auth/tutorials/password-grant).
 
-2. Use a browser bot (such as Selenium) to play the role of a user, log in and retrieve a JWT. While this approach may take some effort to develop and maintain, it will allow you to test any [redirection rules](/rules/redirect) or [MFA prompts](/multifactor-authentication) that you have configured.
+2. Use a browser bot (such as Selenium) to play the role of a user, log in and retrieve a JWT. While this approach may take some effort to develop and maintain, it will allow you to test any [redirection rules](/rules/redirect) or [MFA prompts](/mfa) that you have configured.
 
 ## Use sessions with server-side applications
 
@@ -32,7 +32,7 @@ For a high-level overview of how to do this, see [Authorization Code Flow](/flow
 
 ## Use local domains with Auth0
 
-If you're developing your application locally, you can use `localhost` and other domains inaccessible by Auth0 (such as those on an intranet) as [callback URLs](/users/guides/redirect-users-after-login). For example, during development you could `http://localhost:3000/callback` as the callback URL.
+If you're developing your application locally, you can use `localhost` and other domains inaccessible by Auth0 (such as those on an intranet) as [callback URLs](/users/guides/redirect-users-after-login). For example, during development you could use `http://localhost:3000/callback` as the callback URL.
 
 To set a callback URL, go to [Applications > Settings](${manage_url}/#/applications/${account.clientId}/settings) and add the URL to the **Allowed Callback URLs** list.
 

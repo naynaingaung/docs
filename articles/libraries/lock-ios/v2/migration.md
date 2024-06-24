@@ -4,6 +4,7 @@ toc: true
 url: /libraries/lock-ios/v2/migration
 title: Migrating from v1 to v2 of Lock for iOS
 description: A migration guide to assist with migration from Lock v1 (Swift) to Lock v2 (Swift).
+public: false
 topics:
   - libraries
   - lock
@@ -70,15 +71,15 @@ In Lock v2, this is no longer required.
 In Lock v1 you'd add the following:
 
 ```swift
-func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-  return A0Lock.shared().handle(url, sourceApplication: sourceApplication)
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+  return A0Lock.shared().handle(url, sourceApplication: app)
 }
 ```
 
 In Lock v2 you need to instead use the following:
 
 ```swift
-func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
   return Lock.resumeAuth(url, options: options)
 }
 ```
@@ -284,8 +285,8 @@ Auth0
 
 ### Delegation
 
-Delegation is not available through Lock. It can be implemented via a legacy method in [Auth0.Swift](/libraries/auth0-swift) for tenants which existed prior to June 2017.
-
 <%= include('../../../_includes/_deprecate-delegation') %>
+
+Delegation is not available through Lock. It can be implemented via a legacy method in [Auth0.Swift](/libraries/auth0-swift) for tenants which existed prior to June 2017.
 
 <%= include('../_includes/_roadmap') %>

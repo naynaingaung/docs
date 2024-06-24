@@ -14,7 +14,7 @@ useCase:
 <!-- markdownlint-disable MD041 MD002 -->
 <div class="topic-page-header">
   <div data-name="example" class="topic-page-badge"></div>
-  <h1>SAML Configurations for Single Sign-om Integrations</h1>
+  <h1>SAML Configurations for Single Sign-on Integrations</h1>
   <p>
     This page lists <dfn data-key="security-assertion-markup-language">SAML Configurations</dfn> for various <dfn data-key="single-sign-on">Single Sign-on (SSO)</dfn> integrations.
   </p>
@@ -23,6 +23,7 @@ useCase:
 ## SAML Configuration Tutorials
 
 <%= include('../../../_includes/_topic-links', { links: [
+  'protocols/saml/saml-apps/atlassian',
   'protocols/saml/saml-apps/cisco-webex',
   'protocols/saml/saml-apps/datadog',
   'protocols/saml/saml-apps/egencia',

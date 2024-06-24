@@ -28,7 +28,7 @@ For a business that is creating or integrating applications with Auth0 for a B2E
  
 ## Enterprise providers
 
-Most businesses already have a corporate identity repository which has information on all the employee users and user profile information.  It may also contain information on partners and contractors. A common requirement for the B2E scenario therefore, is to allow such users to log in via [Auth0 Enterprise connections](/identityproviders#enterprise) such as SAML2 providers, ADFS, G Suite, Azure AD or an on-premise corporate directory service.  This is attractive to users because it allows them to avoid creating yet another username and password for each application and instead leverage the same login credential across all their enterprise applications.  
+Most businesses already have a corporate identity repository which has information on all the employee users and user profile information.  It may also contain information on partners and contractors. A common requirement for the B2E scenario therefore, is to allow such users to log in via [Auth0 Enterprise connections](/connections/identity-providers-enterprise) such as SAML2 providers, ADFS, G Suite, Azure AD or an on-premise corporate directory service.  This is attractive to users because it allows them to avoid creating yet another username and password for each application and instead leverage the same login credential across all their enterprise applications.  
 
 This is especially attractive to security interests within the company because user credentials are only exposed to the identity stack instead of to each application.  Furthermore, this architecture allows the business to retain control over access to applications because the enterprise identity provider provides a single shutoff point.  If a user leaves the organization, administrators can simply disable the user’s account in the corporate identity provider and the user can no longer log in to any of the applications using that identity provider.  
 
@@ -70,7 +70,7 @@ Now when a user signs in to one application, they can access other applications 
 
 You can also integrate purchased applications with Auth0 for <dfn data-key="single-sign-on">Single Sign-on (SSO)</dfn>. Auth0 provides [pre-built integrations](/integrations/sso) for applications such as:
 
-* SalesForce
+* Salesforce
 * Zendesk
 * Slack
 * New Relic
@@ -97,7 +97,7 @@ Log events each have an event type. You can use event types as filters when quer
 
 ## Monitoring
 
-Monitoring the infrastructure and services that your applications depend on is critical. [Auth0 provides monitoring endpoints](/monitoring/guides/test-testall-endpoints) as well as an [Auth0 Status](https://status.auth0.com) page you can subscribe to.
+Monitoring the infrastructure and services that your applications depend on is critical. Auth0 provides an [Auth0 Status](https://status.auth0.com) page you can subscribe to.
 
 Auth0 makes every effort to minimize outages, but if there is any disruption to service, it will appear on the status page. To support requirements for root cause analysis documentation after a disruption, Auth0 conducts internal analysis and publishes the results on the disruption notice when the analysis is completed.
 
@@ -105,7 +105,7 @@ Auth0 makes every effort to minimize outages, but if there is any disruption to 
 
 An unfortunate part of modern life on the internet is hackers. Hackers are constantly trying to find a way into applications. For example, they may try to log in using common passwords. Or they may use credentials stolen from elsewhere, hoping that users re-used the same passwords at other sites.
 
-Auth0's [Anomaly Detection](/anomaly-detection) detects these situations for Auth0 Database connections and provides options for how to respond. Turn on Anomaly Detection and configure the response options so you can respond appropriately if such an event occurs.
+Auth0's [Attack Protection](/attack-protection) detects these situations for Auth0 Database connections and provides options for how to respond. Turn on Attack Protection and configure the response options so you can respond appropriately if such an event occurs.
 
 ## Github Deployment
 

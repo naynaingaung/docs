@@ -20,22 +20,28 @@ For information on how the files are expected to be laid out to work with the so
 
 1. Copy `config.json.example`, making sure to replace the placeholder values with the values specific to your configuration.
 
-   ```json
-   {
-     "AUTH0_DOMAIN": "<YOUR_TENANT>.auth0.com",
-     "AUTH0_CLIENT_ID": "<client_id>",
-     "AUTH0_CLIENT_SECRET": "<client_secret>",
-     "AUTH0_KEYWORD_REPLACE_MAPPINGS": {
-       "AUTH0_TENANT_NAME": "<NAME>",
-       "ENV": "DEV"
-     },
-     "AUTH0_ALLOW_DELETE": false,
-     "AUTH0_EXCLUDED_RULES": [
-       "rule-1-name",
-       "rule-2-name"
-     ]
-   }
-   ```
+  ```json
+  {
+    "AUTH0_DOMAIN": "<YOUR_TENANT>.auth0.com",
+    "AUTH0_CLIENT_ID": "<client_id>",
+    "AUTH0_CLIENT_SECRET": "<client_secret>",
+    "AUTH0_KEYWORD_REPLACE_MAPPINGS": {
+      "AUTH0_TENANT_NAME": "<NAME>",
+      "ENV": "DEV"
+    },
+    "AUTH0_ALLOW_DELETE": false,
+    "AUTH0_EXCLUDED_RULES": [
+      "rule-1-name",
+      "rule-2-name"
+    ],
+    "INCLUDED_PROPS": {
+      "clients": [ "client_secret" ]
+    },
+    "EXCLUDED_PROPS": {
+      "connections": [ "options.client_secret" ]
+    }
+  }
+  ```
 
 Use the `client ID` and secret from your newly-created client (the client is named `auth0-deploy-cli-extension` if you used the extension).
 
@@ -46,7 +52,7 @@ You can either set the environment variables, or you can place the values in a c
 2. Deploy using the following command:
 
 ```bash
-a0deploy import -c config.json -i .
+a0deploy import --config_file config.json --input_file .
 ```
 
 ### Example: configuration file
@@ -66,10 +72,16 @@ Here is an example of a `config.json` file:
     "YOUR_STRING_KEY": "some environment specific string"
   },
   "AUTH0_ALLOW_DELETE": false,
-  "AUTH0_EXCLUDED_RULES": [
-    "rule-1-name",
-    "rule-2-name"
-  ]
+  "INCLUDED_PROPS": {
+    "clients": [ "client_secret" ]
+  },
+  "EXCLUDED_PROPS": {
+    "connections": [ "options.client_secret" ]
+  },
+  "AUTH0_EXCLUDED_RULES": [ "auth0-account-link-extension" ],
+  "AUTH0_EXCLUDED_CLIENTS": [ "auth0-account-link" ],
+  "AUTH0_EXCLUDED_RESOURCE_SERVERS": [ "SSO Dashboard API" ],
+  "AUTH0_EXCLUDED_DEFAULTS": ["emailProvider"]
 }
 ```
 
@@ -77,7 +89,7 @@ Here is an example of a `config.json` file:
 
 To export your current tenant configuration, run a command that's similar to:
 
-`a0deploy export -c config.json -f directory -o path/to/export`
+`a0deploy export --config_file config.json --format directory --output_folder path/to/export`
 
 <%= include('../_includes/_strip-option') %>
 
@@ -87,7 +99,7 @@ For more information, see [Environment Variables and Keyword Mappings](/extensio
 
 ### Directory structure example
 
-Here is an example of what the export directory structure looks like:
+Here is a sample of what the export directory structure looks like (for full details on everything that can be included, please refer to the [extension's repository](https://github.com/auth0/auth0-deploy-cli/tree/master/examples/directory):
 
 ```
 repository =>
@@ -127,6 +139,9 @@ repository =>
   rules-configs
     env_param1.json
     some_secret1.json
+  hooks
+     hook1.js
+     hook1.json
   guardian
     factors
       sms.json
@@ -138,6 +153,18 @@ repository =>
     templates
       sms.json
 ```
+
+::: note
+To add hook secrets to your environment, add secrets in the .json configuration file (in this example, hook1.json) as follows:
+
+```json
+"secrets": { 
+  "api-key": "my custom api key" 
+}
+```
+
+The `secrets` object cannot be nested, so remember to prefix your secrets.
+:::
 
 ## Keep reading
 

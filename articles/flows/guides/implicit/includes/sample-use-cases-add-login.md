@@ -7,6 +7,7 @@ This example shows the most basic request you can make when authorizing the user
 ```text
 https://${account.namespace}/authorize?
     response_type=id_token&
+    response_mode=form_post&
     client_id=${account.clientId}&
     redirect_uri=${account.callback}&
     nonce=NONCE
@@ -24,6 +25,7 @@ To request the user's name and picture, you need to add the appropriate scopes w
 ```text
 https://${account.namespace}/authorize?
     response_type=id_token token&
+    response_mode=form_post&
     client_id=${account.clientId}&
     redirect_uri=${account.callback}&
     scope=openid%20name%20picture&
@@ -31,7 +33,7 @@ https://${account.namespace}/authorize?
     nonce=NONCE
 ```
 
-Now, your ID Token will contain the requested name and picture claims. When you [decode the ID Token](/tokens/id-token#id-token-payload), it will look similar to:
+Now, your ID Token will contain the requested name and picture claims. When you [decode the ID Token](/tokens/id-tokens#id-token-payload), it will look similar to:
 
 ```json
 {
@@ -54,6 +56,7 @@ To send users directly to the GitHub login screen, you need to pass the `connect
 ```text
 https://${account.namespace}/authorize?
     response_type=id_token token&
+    response_mode=form_post&
     client_id=${account.clientId}&
     redirect_uri=${account.callback}&
     scope=openid%20name%20picture&
@@ -62,7 +65,7 @@ https://${account.namespace}/authorize?
     connection=github
 ```
 
-Now, your ID Token will contain a `sub` claim with the user's unique ID returned from GitHub. When you [decode the ID Token](/tokens/id-token#id-token-payload), it will look similar to:
+Now, your ID Token will contain a `sub` claim with the user's unique ID returned from GitHub. When you [decode the ID Token](/tokens/id-tokens#id-token-payload), it will look similar to:
 
 ```json
 {

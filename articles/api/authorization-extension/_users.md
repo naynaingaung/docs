@@ -32,7 +32,7 @@ GET https://{extension_url}/users
          ],
          "user_id":"auth0|59091da1b3c34a15589c780d",
          "last_login":"2017-06-25T07:28:54.719Z",
-         "name":"dummy.user@example.com",
+         "name":"placeholder.user@example.com",
          "picture":"https://s.gravatar.com/avatar/your-gravatar.png",
          "email":"richard.dowinton@auth0.com"
       }
@@ -78,11 +78,11 @@ GET https://{extension_url}/users/{user_id}
 
 ```text
 {
-   "email":"dummy.user@example.com",
+   "email":"placeholder.user@example.com",
    "email_verified":true,
    "user_id":"auth0|59091da1b3c34a15589c780d",
    "picture":"https://s.gravatar.com/avatar/your-gravatar.png",
-   "nickname":"dummy.user",
+   "nickname":"placeholder.user",
    "identities":[
       {
          "user_id":"59091da1b3c34a15589c780d",
@@ -93,7 +93,7 @@ GET https://{extension_url}/users/{user_id}
    ],
    "updated_at":"2017-06-25T07:28:54.719Z",
    "created_at":"2017-06-08T15:30:41.237Z",
-   "name":"dummy.user@example.com",
+   "name":"placeholder.user@example.com",
    "app_metadata":{
       "authorization":{
          "roles":[
@@ -219,7 +219,7 @@ include('../../_includes/_http-method', {
   "link": "#add-user-to-groups"
 }) %>
 
-Use this endpoint to add one or more users in a group.
+Use this endpoint to add a user to one or more groups.
 
 ### Scopes
 
@@ -548,8 +548,8 @@ The <dfn data-key="access-token">[Access Token](#get-an-access-token)</dfn> shou
 | Parameter        | Description |
 |:-----------------|:------------|
 | `{extension_url}` <br/><span class="label label-danger">Required</span> | The URL of your Authorization Extension. For more info, see [Find your extension URL](#find-your-extension-url) |
-| `{access_token}` <br/><span class="label label-danger">Required</span> | The token your client retrieved from Auth0 in order to access the API. For more info, see [Get an Access Token](#get-an-access-token) |
+| `{access_token}` <br/><span class="label label-danger">Required</span> | The token your client retrieved from Auth0 to access the API. For more info, see [Get an Access Token](#get-an-access-token) |
 | `{user_id}` <br/><span class="label label-danger">Required</span> |  |
 | `{client_id}` <br/><span class="label label-danger">Required</span> |  |
-| `connectionName` | The connection name the user logged in with |
+| `connectionName` <br/><span class="label label-danger">Required</span> | The name of the connection with which the user logged in |
 | `groups` | List of group names received from the IdP (AD, ADFS, and so on) |

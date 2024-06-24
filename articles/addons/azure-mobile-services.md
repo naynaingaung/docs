@@ -2,6 +2,7 @@
 addon: Windows Azure Mobile Services
 title: Windows Azure Mobile Services Add-on
 thirdParty: true
+public: false
 url: /addons/azure-mobile-services
 image: /media/platforms/azure.png
 snippets:
@@ -23,6 +24,8 @@ description: Learn how to use Auth0 to authenticate and authorize Windows Azure 
 ---
 
 # Windows Azure Mobile Services Add-on
+
+<%= include('../_includes/_uses-delegation') %>
 
 ## 1. Create an application
 

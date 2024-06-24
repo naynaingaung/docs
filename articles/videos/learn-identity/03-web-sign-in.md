@@ -2,12 +2,18 @@
 description: Authentication for web applications using OpenID Connect.
 classes: video-page
 image: https://cdn2.auth0.com/docs/media/articles/learn-identity/learn-identity-og-image.jpg
+public: false
 ---
+<!-- markdownlint-disable-->
 # Web Sign-In
 
 Authentication for web applications using OpenID Connect.
 
 <div class="video-wrapper" data-video="k4rwcky3p5"></div>
+
+## Related Identity Lab
+
+[<i class="icon icon-budicon-529"></i> Lab 1: Web Sign-On](/identity-labs/01-web-sign-in)
 
 ## Jump to Section
 

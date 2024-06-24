@@ -18,7 +18,7 @@ useCase:
 This article describes the user profile that includes only the [OpenID Connect (OIDC) standard claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims). Use the toggle for information on the Auth0 normalized profile, which might contain information from many identity providers.
 :::
 
-When you're using an OIDC-conformant authentication flow, the user profile you receive in return may differ slightly from the [Auth0 Normalized User Profile](/users/normalized).
+When you're using an OIDC-conformant authentication flow, the user profile you receive in return may differ slightly from the [Auth0 Normalized User Profile](/users/normalized/auth0).
 
 The following is a [non-normative example of such a response](https://openid.net/specs/openid-connect-basic-1_0.html#StandardClaims):
 
@@ -42,7 +42,13 @@ The following is a [non-normative example of such a response](https://openid.net
    "locale": "",
    "phone_number": "",
    "phone_number_verified": false,
-   "address": "",
+   "address": {
+      "street_address": "",
+      "locality": "",
+      "region": "",
+      "postal_code": "",
+      "country": ""
+   },
    "updated_at": "",
   }
 ```
@@ -51,7 +57,7 @@ The following is a [non-normative example of such a response](https://openid.net
 
 You can retrieve the user profile by retrieving an ID Token using the Authentication API's [`oauth/token` endpoint](/api/authentication#get-token) or the [`/userinfo` endpoint](/api/authentication#get-user-info). Auth0's [Lock](https://auth0.com/docs/libraries#lock-login-signup-widgets) widget and the [Auth0 client-side SDKs](/libraries#auth0-client-side-sdks) also return the OIDC-compliant user profile.
 
-Additionally, the User Profile section of our [QuickStarts](/quickstarts) return user profiles compliant with the OIDC specification. Some of our more popular QuickStarts are:
+Additionally, the User Profile section of our [Quickstarts](/quickstarts) return user profiles compliant with the OIDC specification. Some of our more popular Quickstarts are:
 
 - [ASP.NET Core](/quickstart/webapp/aspnet-core/04-user-profile)
 - [Android](/quickstart/native/android/04-user-profile)
@@ -78,8 +84,14 @@ Additionally, the User Profile section of our [QuickStarts](/quickstarts) return
 | `gender` | gender of the user |
 | `birthdate` | birthday of the user |
 | `zoneinfo` | time zone in which the user is located |
-| `locale` | location where the user is located |
+| `locale` | two-part code representing the end user's language and location (e.g., `fr-CA` for a user located in Canada and working in French) |
 | `phone_number` | preferred telephone number for the user |
 | `phone_number_verified` <br/><span class="label label-primary">Boolean</span> | `true` if user's phone number is verified; else, `false` |
 | `address` <br/><span class="label label-primary">JSON Object</span> | preferred postal address of the user |
 | `updated_at` <br/><span class="label label-primary">Number</span> | time when the user's profile was last updated |
+
+## Keep reading
+
+* [Configure Applications with OpenID Connect Discovery](/protocols/oidc/openid-connect-discovery)
+* [OIDC Conformant Authentication Adoption Guide](/api-auth/tutorials/adoption)
+* [OIDC Handbook](https://auth0.com/resources/ebooks/the-openid-connect-handbook)

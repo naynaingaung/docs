@@ -55,7 +55,7 @@ OpenID Connect supports more than one flow for authentication. Since our scenari
 The flow goes as follows:
 1. The web app (called the __Client__ in OIDC terms) initiates the authentication request by redirecting the __user-agent__ (browser) to Auth0 (the __Authorization Server__ in OIDC terms).
 1. Auth0 authenticates the user (via the user-agent). The first time the user goes through this flow a consent page will be shown where the permissions that will be given to the Application are listed (for example, post messages, list contacts). The user logs in to the service (unless they are already logged in) and authorizes the application access.
-1. Assuming the user grants access, Auth0 redirects the __user-agent__ back to the __Application__, along with an _authorization code_ in the querystring.
+1. Assuming the user grants access, Auth0 redirects the __user-agent__ back to the __Application__, along with an _authorization code_ in the query string.
 1. The Application sends the _authorization code_ to Auth0, along with the application credentials (`client_id` and `client_secret`), and asks for a token.
 1. Auth0 authenticates the __Application__ (using the `client_id` and `client_secret`) and validates the _authorization code_. If valid, Auth0 responds back with an __ID Token__.
 
@@ -70,7 +70,7 @@ The __ID Token__ (usually referred to as `id_token` in code samples) is a __JSON
 ::: panel More on tokens
 Tokens are alphanumeric strings used in token-based authentication. They allow users to authenticate with a username and password once and get a token in return which they can use from that point on. They have a limited lifetime duration.
 
-__JSON Web Tokens (JWTs)__ are tokens that conform to the [JSON Web Token Standard](https://tools.ietf.org/html/rfc7519) and contain information about an identity in the form of claims. They are self-contained in that it is not necessary for the recipient to call a server to validate the token. JWTs can be signed using a secret (with the __HMAC__ algorithm) or a public/private key pair using __RSA__. You can find more information on JWT [here](/jwt).
+__JSON Web Tokens (JWTs)__ are tokens that conform to the [JSON Web Token Standard](https://tools.ietf.org/html/rfc7519) and contain information about an identity in the form of claims. They are self-contained in that it is not necessary for the recipient to call a server to validate the token. JWTs can be signed using a secret (with the __HMAC__ algorithm) or a public/private key pair using __RSA__. You can find more information on JWT [here](/tokens/concepts/jwts).
 
 The ID Token, which is a JWT, conforms to an industry standard (IETF [RFC 7519](https://tools.ietf.org/html/rfc7519)) and contains three parts: A header, a body and a signature.
 - The header contains the type of token and the hash algorithm used on the contents of the token.

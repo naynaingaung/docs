@@ -2,12 +2,16 @@
 description: Authentication and delegated authorization for single page applications.
 classes: video-page
 image: https://cdn2.auth0.com/docs/media/articles/learn-identity/learn-identity-og-image.jpg
+public: false
 ---
+<!-- markdownlint-disable-->
 # Single Page Apps
 
 Authentication and delegated authorization for single page applications.
 
 <div class="video-wrapper" data-video="0pi7bt90c9"></div>
+
+[<i class="icon icon-budicon-529"></i> Lab 4: Single-Page Applications](/identity-labs/04-single-page-app)
 
 ## Jump to Section
 

@@ -29,7 +29,7 @@ useCase:
 
 ## Anomaly detection
 
-<%= include('../../_includes/_authentication/_anomaly-detection.md', { platform: 'b2c' }) %>
+<%= include('../../_includes/_authentication/_attack-protection.md', { platform: 'b2c' }) %>
 
 ## SSO with legacy systems
 
@@ -45,16 +45,8 @@ useCase:
 
 ## Project Planning Guide
 
-<%= include('../../_includes/_planning.md', { platform: 'b2b' }) %>
+<%= include('../../_includes/_planning.md', { platform: 'b2c' }) %>
 
 ## Keep reading
 
-* [Architecture](/architecture-scenarios/implementation/b2c/b2c-architecture)
-* [Provisioning](/architecture-scenarios/implementation/b2c/b2c-provisioning)
-* [Branding](/architecture-scenarios/implementation/b2c/b2c-branding)
-* [Deployment Automation](/architecture-scenarios/implementation/b2c/b2c-deployment)
-* [Quality Assurance](/architecture-scenarios/implementation/b2c/b2c-qa)
-* [Profile Management](/architecture-scenarios/implementation/b2c/b2c-profile-mgmt)
-* [Authorization](/architecture-scenarios/implementation/b2c/b2c-authorization)
-* [Logout](/architecture-scenarios/implementation/b2c/b2c-logout)
-* [Operations](/architecture-scenarios/implementation/b2c/b2c-operations)
+<%= include('../../_includes/_keep-reading.md', { platform: 'b2c', self: 'authentication' }) %>

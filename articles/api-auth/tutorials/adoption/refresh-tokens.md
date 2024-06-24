@@ -1,5 +1,5 @@
 ---
-title: OIDC-conformant Refresh Token use
+description: Understand how refresh tokens are used in an OIDC-conformant authentication pipeline.
 topics:
   - api-authentication
   - oidc
@@ -11,14 +11,13 @@ useCase:
   - call-api
 ---
 
-# OIDC-conformant Refresh Tokens
+# OIDC-Conformant Refresh Tokens
 
 <%= include('./_about.md') %>
 
 There are some changes to how <dfn data-key="refresh-token">Refresh Tokens</dfn> are used in the OIDC-conformant authentication pipeline:
 
 * Using the [implicit grant](/api-auth/tutorials/adoption/implicit) for authentication will no longer return Refresh Tokens.
-  Use [silent authentication](/api-auth/tutorials/silent-authentication) (such as `prompt=none`) instead.
 * Refresh Tokens should only be used by [confidential applications](/applications/concepts/app-types-confidential-public#confidential-applications). However, they can also be used by Native (public) applications to obtain Refresh Tokens for mobile apps. 
 * The `/delegation` endpoint is deprecated. To obtain new tokens from a Refresh Token, the `/oauth/token` endpoint should be used instead:
 
@@ -54,6 +53,6 @@ grant_type=refresh_token&refresh_token=123&client_id=123&client_secret=123&scope
 
 Please note that Refresh Tokens must be kept confidential in transit and storage, and they should be shared only among the authorization server and the client to whom the Refresh Tokens were issued.
 
-## Further reading
+## Keep reading
 
 <%= include('./_index.md') %>

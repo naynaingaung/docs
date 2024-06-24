@@ -1,5 +1,5 @@
 ---
-title: User profile claims and scope
+description: Apps can request any standard OIDC scopes such as profile and email as well as any scopes supported by the API they want to access.
 topics:
   - api-authentication
   - oidc
@@ -12,7 +12,7 @@ useCase:
   - call-api
 ---
 
-# User profile claims and scope
+# User Profile Claims and the `scope` Parameter
 
 <%= include('./_about.md') %>
 
@@ -58,7 +58,7 @@ This is a [*normalized user profile*](/users/normalized), which is a protocol-ag
 }
 ```
 
-Note that the `user_id` property is sent as `sub` in the ID Token, and that `favorite_color` and `user_metadata` are not present in the OIDC response from Auth0. This is because OIDC does not define standard claims to represent all the information in this user’s profile. We can, however, define a non-standard claim by namespacing it through a rule:
+Note that the `user_id` property is sent as `sub` in the ID Token, and that `favorite_color` and `user_metadata` are not present in the OIDC response from Auth0. This is because OIDC does not define standard claims to represent all the information in this user’s profile. We can, however, define a non-standard claim by namespacing it through a [rule](/rules):
 
 ```js
 function (user, context, callback) {

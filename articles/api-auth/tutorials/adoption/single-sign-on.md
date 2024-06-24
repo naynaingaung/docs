@@ -1,5 +1,5 @@
 ---
-title: OIDC Single Sign-On
+description: Understand how OIDC Single Sign-On occurs when a user logs into one app and is then signed into other apps automatically. 
 topics:
   - api-authentication
   - oidc
@@ -10,17 +10,17 @@ useCase:
   - call-api
 ---
 
-# Single Sign-On
+# OIDC Single Sign-On
 
 <%= include('./_about.md') %>
 
-<dfn data-key="single-sign-on">Single Sign-on (SSO)</dfn> occurs when a user logs in to one application and is then signed in to other applications automatically.
+<dfn data-key="single-sign-on">Single Sign-on (SSO)</dfn> occurs when a user logs into one application and is then signed into other applications automatically.
 
 In the context of the OIDC-conformant authentication pipeline, SSO must happen at the authorization server (i.e. Auth0) and not applications.
 
 This means that for SSO to happen, you must employ <dfn data-key="universal-login">Universal Login</dfn> and redirect users to the login page.
 
-## How SSO works
+## How it works
 
 At a general level, this is what happens when performing SSO:
 
@@ -56,4 +56,7 @@ When using Universal Login, the login page is by default hosted at an Auth0 doma
 
 This is only an aesthetic limitation and does not impact the security or functionality of SSO logins in any way.
 
-You can read further about [customizing your domain](/custom-domains) if you require it, to help maintain a uniform experience for your users.
+## Keep reading
+
+* [Custom Domains](/custom-domains)
+* [OIDC Handbook](https://auth0.com/resources/ebooks/the-openid-connect-handbook)

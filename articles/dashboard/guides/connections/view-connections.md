@@ -15,7 +15,7 @@ useCase:
 
 This guide will show you how to view all of the available and configured [connections](/connections) using Auth0's Dashboard. The configured connections can be used to log in to your applications.
 
-1. Navigate to the [Auth0 Dashboard](${manage_url}/#/), and click **Connections** in the left nav.
+1. Navigate to the [Auth0 Dashboard](${manage_url}/#/), and select **Authentication** in the left nav.
 
 2. Select a connection type:
 
@@ -29,5 +29,5 @@ This guide will show you how to view all of the available and configured [connec
 
 - [Set Up Social Connections](/dashboard/guides/connections/set-up-connections-social)
 - [Identity Providers Supported by Auth0](/identityproviders)
-- [Multiple Tenants](/applications/concepts/multiple-tenants)
+- [Create Multiple Tenants](/dashboard/guides/tenants/create-multiple-tenants)
 - [Using Auth0 with Multi-Tenant Applications](/design/using-auth0-with-multi-tenant-apps)

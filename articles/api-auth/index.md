@@ -62,16 +62,16 @@ In this page you can find a list of resources that can help you secure your APIs
     </ul>
   </li>
   <li>
-    <i class="icon icon-budicon-715"></i><a href="/flows/guides/implicit/call-api-implicit">Call Your API from a Single-Page App</a>
+    <i class="icon icon-budicon-715"></i><a href="/flows/guides/auth-code-pkce/call-api-auth-code-pkce">Call Your API from a Single-Page App</a>
     <p>
       If your application is a JavaScript-centric app executing on the browser, and you want to configure it to use OAuth 2.0 to access an API, read these docs.
     </p>
     <ul>
       <li>
-        <i class="icon icon-budicon-695"></i><a href="/flows/concepts/implicit">Overview of the flow</a>
+        <i class="icon icon-budicon-695"></i><a href="/flows/concepts/auth-code-pkce">Overview of the flow</a>
       </li>
       <li>
-        <i class="icon icon-budicon-695"></i><a href="/flows/guides/implicit/call-api-implicit">Executing the flow</a>
+        <i class="icon icon-budicon-695"></i><a href="/flows/guides/auth-code-pkce/call-api-auth-code-pkce">Executing the flow</a>
       </li>
       <li>
         <i class="icon icon-budicon-695"></i><a href="/api-auth/tutorials/silent-authentication">Silent authentication for SPAs</a>
@@ -126,7 +126,7 @@ In this page you can find a list of resources that can help you secure your APIs
         <i class="icon icon-budicon-695"></i><a href="/api-auth/tutorials/password-grant">Executing the flow</a>
       </li>
       <li>
-        <i class="icon icon-budicon-695"></i><a href="/api-auth/tutorials/multifactor-resource-owner-password">How to use MFA with Resource Owner Password Grant</a>
+        <i class="icon icon-budicon-695"></i><a href="/mfa/guides/mfa-api/multifactor-resource-owner-password">How to use MFA with Resource Owner Password Grant</a>
       </li>
       <li>
         <i class="icon icon-budicon-695"></i><a href="/api-auth/tutorials/using-resource-owner-password-from-server-side">How to use Resource Owner Password Grant from the server side together with Anomaly Detection</a>
@@ -134,9 +134,9 @@ In this page you can find a list of resources that can help you secure your APIs
     </ul>
   </li>
   <li>
-    <i class="icon icon-budicon-715"></i><a href="/api-auth/why-use-access-tokens-to-secure-apis">Why you should always use Access Tokens to secure an API</a>
+    <i class="icon icon-budicon-715"></i><a href="/tokens">Tokens</a>
     <p>
-      Learn about the differences between Αccess Τoken and ID Τoken and why the latter should never be used to secure an API.
+      Learn about the types of tokens related to identity and authentication and how they are used by Auth0.
     </p>
   </li>
   <li>
@@ -146,7 +146,7 @@ In this page you can find a list of resources that can help you secure your APIs
     </p>
   </li>
   <li>
-    <i class="icon icon-budicon-715"></i><a href="/api-auth/tutorials/verify-access-token">Verify Access Tokens</a>
+    <i class="icon icon-budicon-715"></i><a href="/tokens/guides/validate-access-tokens">Validate Access Tokens</a>
     <p>
       Learn what an API has to do in order to verify a Bearer Access Token.
     </p>

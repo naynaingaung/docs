@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting the Active Directory/LDAP Connector
+title: Troubleshoot Active Directory/LDAP Connector
 description: Common issues and troubleshooting information for the Active Directory/LDAP Connector.
 toc: true
 topics:
@@ -11,7 +11,7 @@ useCase:
   - customize-connections
   - add-idp
 ---
-# Troubleshooting the Active Directory/LDAP Connector
+# Troubleshoot Active Directory/LDAP Connector
 
 We do our best to support many scenarios and different configurations.
 
@@ -63,12 +63,10 @@ These are the most common problems:
 
 ### Clock skew
 
-Make sure the clock of your server is current.
-
-If the time is not correct, it will cause authentication requests to fail. This can be fixed by ensuring that the System is properly configured to use to poll a sync server via the NTP (Network Time Protocol).
+Make sure the clock of your server is current. If the time is not correct, it will cause authentication requests to fail. This can be fixed by ensuring the system is properly configured to poll a sync server via the Network Time Protocol (NTP).
 
 ::: note
-On windows environments the ntp provider is usually the same domain controller. Make sure that your Domain Controller is synchronized with some external service.
+On Windows environments the NTP provider is usually the same domain controller. Make sure that your Domain Controller is synchronized with some external service.
 :::
 
 ### No connection to Active Directory

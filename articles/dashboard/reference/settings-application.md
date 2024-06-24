@@ -1,6 +1,6 @@
 ---
-title: Auth0 Dashboard Application Settings
-description: Learn about the Application Settings available through the Auth0 Dashboard.
+title: Application Settings
+description: Learn about the settings related to applications available in the Auth0 Dashboard.
 topics:
   - api-authentication
   - oidc
@@ -10,10 +10,9 @@ contentType: reference
 useCase:
   - add-login
 ---
-
 # Application Settings
 
-In the [Application](${manage_url}/#/applications) section, locate your Application, and click on its *Settings* to review the available settings.
+On the [Applications](${manage_url}/#/applications) page of the [Auth0 Dashboard](${manage_url}/), locate your Application and click its name to view the available settings.
 
 ## Basic Settings
 
@@ -35,7 +34,7 @@ While the Client ID is considered public information, the Client Secret **must b
 
 - **Application Logo**: The URL to a logo (recommended size: 150x150 pixels) to be displayed for the application. Appears in several areas, including the list of applications in the Dashboard and customized consent forms.
 
-- **Application Type**: The [Auth0 application type](/applications/concepts/app-types-auth0). Determines which settings you can configure using the Dashboard. Not editable for M2M Apps. Sometimes disabled for other Auth0 application types if the selected grant types are only allowed for the currently selected application type.
+- **Application Type**: The [Auth0 application type](/applications). Determines which settings you can configure using the Dashboard. Not editable for M2M Apps. Sometimes disabled for other Auth0 application types if the selected grant types are only allowed for the currently selected application type.
 
 - **Token Endpoint Authentication Method**: Defines the requested authentication method for the token endpoint. Possible values are `None` (public client without a client secret), `Post` (client uses HTTP POST parameters), and `Basic` (client uses HTTP Basic). Only editable for Regular Web Apps and M2M Apps.
 
@@ -43,25 +42,25 @@ While the Client ID is considered public information, the Client Secret **must b
 You can provide up to 100 URLs in the **Allowed Callback URLs**, **Allowed Web Origins**, **Allowed Logout URLs**, **Allowed Origins (CORS)** fields.
 :::
 
-- **Allowed Callback URLs**: Set of URLs to which Auth0 is allowed to redirect users after they authenticate. You can specify multiple valid URLs by comma-separating them (typically, to handle different environments like QA or testing). For production environments, verify that the URLs do not point to localhost. You can use the star symbol as a wildcard for subdomains (`*.google.com`). Make sure to specify the protocol, `http://` or `https://`; otherwise, the callback may fail in some cases.
+- **Allowed Callback URLs**: Set of URLs to which Auth0 is allowed to redirect users after they authenticate. You can specify multiple valid URLs by comma-separating them (typically, to handle different environments like QA or testing). For production environments, verify that the URLs do not point to localhost. You can use the star symbol as a [wildcard for subdomains](/applications/reference/wildcard-subdomains) (`*.google.com`). Make sure to specify the protocol, `http://` or `https://`; otherwise, the callback may fail in some cases.
 
 - **Application Login URI**: In some scenarios Auth0 will need your application to start the OIDC login flow. This URI should point to a route in your application that starts the flow, by redirecting to the `/authorize` endpoint. It would usually take the form of 'https://myapp.org/login'. [Learn more](/universal-login/default-login-url).
 
 - **Allowed Web Origins**: List of URLs from where an authorization request using [`web_message` as the response mode](/protocols/oauth2#how-response-mode-works) can originate from. You can specify multiple valid URLs by comma-separating them. For production environments, verify that the URLs do not point to localhost.
 
-- **Allowed Logout URLs**: List of URLs to which you can redirect users after they log out from Auth0. Use the `returnTo` query parameter to redirect them. You can specify multiple valid URLs by comma-separating them.  For production environments, verify that the URLs do not point to localhost. You can use the star symbol as a wildcard for subdomains (`*.google.com`). Querystrings and hash information are not taken into account when validating these URLs. For more info, see [Logout](/logout).
+- **Allowed Logout URLs**: List of URLs to which you can redirect users after they log out from Auth0. Use the `returnTo` query parameter to redirect them. You can specify multiple valid URLs by comma-separating them.  For production environments, verify that the URLs do not point to localhost. You can use the star symbol as a [wildcard for subdomains](/applications/reference/wildcard-subdomains) (`*.google.com`). Querystrings and hash information are not taken into account when validating these URLs. For more info, see [Logout](/logout).
 
-- **Allowed Origins (CORS)**: Set of URLs that will be allowed to make requests from JavaScript to Auth0 API (typically used with CORS). This prevents same-origin policy errors when using Auth0 from within a web browser. By default, all your callback URLs will be allowed; this field allows you to enter other origins if you need to. You can specify multiple valid URLs by comma-separating them. For production environments, verify that the URLs do not point to localhost. You can use the star symbol as a wildcard for subdomains (`*.google.com`). Paths, querystrings, and hash information are not taken into account when validating these URLs (and may, in fact, cause the match to fail).
+- **Allowed Origins (CORS)**: Set of URLs that will be allowed to make requests from JavaScript to Auth0 API (typically used with CORS). This prevents same-origin policy errors when using Auth0 from within a web browser. By default, all your callback URLs will be allowed; this field allows you to enter other origins if you need to. You can specify multiple valid URLs by comma-separating them. For production environments, verify that the URLs do not point to localhost. You can use the star symbol as a [wildcard for subdomains](/applications/reference/wildcard-subdomains) (`*.google.com`). Paths, querystrings, and hash information are not taken into account when validating these URLs (and may, in fact, cause the match to fail).
 
-- **JWT Expiration (seconds)**: The amount of time (in seconds) before the Auth0 ID Token expires. The default value is `36000`, which maps to 10 hours.
+- **ID Token Expiration (seconds)**: The amount of time (in seconds) before the Auth0 ID Token expires. The default value is `36000`, which maps to 10 hours.
 
-- **Use Auth0 instead of the IdP to do Single Sign-on**: If enabled, this setting prevents Auth0 from redirecting authenticated users with valid sessions to the identity provider (such as Facebook or ADFS).
+- **Use Auth0 instead of the IdP to do Single Sign-on**: If enabled, this setting prevents Auth0 from redirecting authenticated users with valid sessions to the identity provider (such as Facebook or ADFS). **Legacy tenants only.**
 
 ## Advanced Settings
 
 The **Advanced Settings** section allows you to:
 
-* Manage or add Application Metadata, Mobile, OAuth, and WS-Federation settings 
+* Manage or add Application Metadata, Device, OAuth, and WS-Federation settings 
 * Obtain certificates and token endpoint information
 * Set the grant type(s) for the Application
 
@@ -73,7 +72,7 @@ Application metadata are custom string keys and values (each of which has a char
 
 You can create up to 10 sets of metadata.
 
-### Mobile Settings
+### Device Settings
 
 If you're developing a mobile application, you can provide the necessary iOS/Android parameters here.
 
@@ -85,9 +84,9 @@ When developing Android apps, you'll provide your **App Package Name** and your 
 
 Set the OAuth-related settings on this tab:
 
-* By default, all apps/APIs can make a delegation request, but if you want to explicitly grant permissions to selected apps/APIs, you can do so in **Allowed APPs/APIs**.
+* By default, all apps/APIs can make a delegation request, but if you want to explicitly grant permissions to selected apps/APIs, you can do so in **Allowed Apps/APIs**.
 
-* Set the algorithm used (**HS256** or **RS256**) for signing your JSON Web Tokens. For more info, see [Signing Algorithms](/applications/concepts/signing-algorithms).
+* Set the algorithm used (**HS256** or **RS256**) for signing your JSON Web Tokens. For more info, see [Signing Algorithms](/tokens/concepts/signing-algorithms).
 
 * Toggle the **Trust Token Endpoint IP Header** setting; if this is enabled, the `auth0-forwarded-for` is set as trusted and used as a source of end user IP information for protection against brute-force attacks on the token endpoint. This setting is only available for Regular Web Apps and M2M Apps.
 

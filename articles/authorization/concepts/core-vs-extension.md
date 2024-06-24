@@ -19,9 +19,9 @@ useCase:
 ---
 # Authorization Core vs. Authorization Extension
 
-Auth0 currently provides two way of implementing [role-based access control (RBAC)](/authorization/concepts/rbac): our core implementation, which is currently being released, and our Authorization Extension, which will eventually be deprecated. Our new core implementation improves performance and scalability and will eventually provide a more flexible RBAC system than the Authorization Extension.
+Auth0 currently provides two ways of implementing [role-based access control (RBAC)](/authorization/concepts/rbac): our Core implementation, which is currently being released, and our Authorization Extension, which will eventually be deprecated. Our Core implementation improves performance and scalability and will eventually provide a more flexible RBAC system than the Authorization Extension.
 
-While we recommend using the RBAC features present in the Authorization core, we recognize that some implementations may require use of the Authorization Extension until Authorization core features match its full functionality. To help you decide which feature is right for your implementation, we present the differences between the two:
+While we recommend using the RBAC features present in the Authorization Core, we recognize that some implementations may require use of the Authorization Extension until Authorization Core features match its full functionality. To help you decide which feature is right for your implementation, we present the differences between the two:
 
 | Feature | Authorization&nbsp;Core | Authorization&nbsp;Extension |
 |---------|-------------------------|------------------------------|
@@ -78,11 +78,12 @@ While we recommend using the RBAC features present in the Authorization core, we
 | Create custom authorization policies | Yes | No |
 | Create deny assignments | To be determined | No |
 | **Performance/Scalability** |
-| Enhanced performance and scalability | Yes | No - Limited to 500KB of data (1000 groups, 3000 users, where each user is a member of 3 groups; or 20 groups, 7000 users, where each user is a member of 3 groups) |
+| Enhanced performance and scalability | Yes - See [Authorization Core RBAC Limits](/authorization/reference/rbac-limits) | No - Limited to 500KB of data (1000 groups, 3000 users, where each user is a member of 3 groups; or 20 groups, 7000 users, where each user is a member of 3 groups) |
 
 ## Keep reading
 
 - [Role-Based Access Control (RBAC)](/authorization/concepts/rbac)
+- [Authorization Core RBAC Limits](/authorization/reference/rbac-limits)
 - [Authorization Policies](/authorization/concepts/policies)
 - [Rules for Authorization Policies](/authorization/concepts/authz-rules)
 - [Sample Use Cases: Role-Based Access Control](/authorization/concepts/sample-use-cases-rbac)

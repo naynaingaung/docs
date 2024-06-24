@@ -24,10 +24,9 @@ The **GitLab Deployments** extension allows you to deploy [rules](/rules), rules
 * **REPOSITORY**: The name of your GitLab repository.
 * **BRANCH**: The branch of your GitLab repository your extension should monitor.
 * **URL**: The URL of your GitLab instance, in case of gitlab.com use `https://gitlab.com`
-* **TOKEN**: The personal Access Token to your GitLab repository for this account. For details on how to configure one refer to [Configure a GitLab Token](configure-a-gitlab-token).
+* **TOKEN**: The personal Access Token to your GitLab repository for this account. To learn how to configure one, see [Configure a GitLab Token](#configure-a-gitlab-token).
 * **BASE_DIR**: The base directory, where all your tenant settings are stored. If you want to keep your tenant settings under `org/repo/tenant/production`, `org/repo` goes to the `REPOSITORY` and `tenant/production` - to `BASE_DIR`
-* **ENABLE_CIPHER**: Enables secrets encryption/decryption support
-* **CIPHER_PASSWORD**: The password for encryption/decryption of secrets
+* **AUTO_REDEPLOY**: If enabled, the extension redeploys the last successful configuration in the event of a deployment failure. Manual deployments and validation errors does not trigger auto-redeployment
 * **SLACK_INCOMING_WEBHOOK**: The URL used to integrate with Slack to deliver notifications.
 
 ::: note
@@ -103,7 +102,9 @@ With each commit you push to your configured GitLab repository, the webhook will
 The **Deploy** button on the **Deployments** tab of the extension allows you to manually deploy the Rules, Pages, and Database Connection scripts that you already have in your GitLab repository. This is useful if your repository already contains items that you want to deploy once you have set up the extension or if you have accidentally deleted some scripts in Auth0 and need to redeploy the latest version of your repository.
 
 ::: panel-warning Full Deployment
-To maintain a consistent state, the extension will always do a full deployment of the contents of these folders. **Any rules, pages or database connection scripts that exist in Auth0 but not in your GitHub repository will be deleted**.
+To maintain a consistent state, the extension will always do a full deployment of the contents of these folders. **Any rules, pages, or database connection scripts that exist in Auth0 but not in your GitHub repository will be deleted**.
+
+To delete existing settings when AUTH0_ALLOW_DELETE is set to yes, corresponding folders must be present and contain configuration files; settings will not be deleted for missing folders or empty folders. We recommend setting up all configurations, since we are unable to provide data restores at this time.
 :::
 
 ### Deploy Database Connection scripts
@@ -125,9 +126,11 @@ You can find examples in [the Auth0 Samples repository](https://github.com/auth0
 
 ### Deploy Database Connection settings
 
-To deploy Database Connection settings, you must create `database-connections/[connection-name]/settings.json`. 
+To deploy Database Connection settings, you must create `database-connections/[connection-name]/database.json`.
 
 _This will work only for Auth0 connections (`strategy === auth0`), for non-Auth0 connections use `connections`._
+
+_Support for using `settings.json` has been deprecated in favor of `database.json` since v3.1.1 of the extension and may be dropped in a future release._
 
 See [Management API v2 Docs](https://auth0.com/docs/api/management/v2#!/Connections/patch_connections_by_id) for more info on allowed attributes for Connections.
 
@@ -148,6 +151,8 @@ __facebook.json__
   "options": {}
 }
 ```
+
+<%= include('./_includes/_embedded-clients-array') %>
 
 _This will work only for non-Auth0 connections (`strategy !== auth0`); for Auth0 connections, use `database-connections`._
 
@@ -187,10 +192,6 @@ For example, if you create the file `rules/set-country.js`, the extension will c
 ::: note
 If you plan to use source control integration for an existing account, first rename your Rules in Auth0 to match the name of the files you will be deploying to this directory.
 :::
-
-You can mark rules as manual. In that case, the source control extension will not delete or update them. To mark a rule navigate to the *Rules Configuration* tab of the **GitLab Integration** page. Toggle the **Manual Rule** switch for the rules you want to mark as manual. Click **Update Manual Rules** to save your changes.
-
-![Mark rules as manual](/media/articles/extensions/gitlab-deploy/manual-rule.png)
 
 You can also control the Rule order and status (`enabled`/`disabled`) by creating a JSON file with the same name as your JavaScript file. For this example, you would create a file named `rules/set-country.json`.
 
@@ -269,6 +270,8 @@ __my-client-api.json__
 }
 ```
 
+<%= include('./_includes/_deployment-extension') %>
+
 ### Deploy Resource Servers
 
 To deploy a resource server, you must create a JSON file under the `resource-servers` directory of your GitLab repository. Example:
@@ -341,25 +344,42 @@ __blocked_account.json__
 }
 ```
 
-## Encrypt Secrets
+## Excluded records
 
-Beginning with version **2.8.0**, you can encrypt sensitive data (e.g., Rules configurations) so that you can store your files in public repositorieis.
+You can exclude the following records from the deployment process: `rules`, `clients`, `databases`, `connections` and `resourceServers`. If excluded, the records will not be modified by deployments.
 
-To encrypt your data, log in to your extension and go to the **Secrets Encryption Tool** (you should have enabled the cipher in the extension's configuration settings).
+![](/media/articles/extensions/deploy-extensions/excluded-rules.png)
 
-![](/media/articles/extensions/gitlab-deploy/encryption.png)
+## Keywords Mapping
 
-Copy `Encrypted Secret` to any string field that should remain private as shown:
+Beginning with version **3.0.0**, you can use keywords mapping to manage your secrets and tenant-based environment variables.
 
-__rules-configs/biggest_secret.json__
+There are two ways to use the keyword mappings. You can either wrap the key using `@` symbols (e.g., `@@key@@`), or you can wrap the key using `#` symbols (e.g., `##key##`). 
+
+  - If you use `@` symbols, your value will be converted from a JavaScript object or value to a JSON string.
+
+  - If you use `#` symbols, Auth0 will perform a literal replacement.
+
+This is useful for something like specifying different variables across your environments. For example, you could specify different JWT timeouts for your Development, QA/Testing, and Production environments.
+
+Refer to the snippets below for sample implementations:
+
+__Client.json__
 ```json
 {
-  "key": "biggest_secret",
-  "value": "nobody should know that [!cipher]0dcd9c0696b1feb7878bd4d8360db09e8885319046955d4a6ae1cd6135e5f58cce654f15b136eacc06981c0c7a4bb32f3a5c19-2c84a546cb503666382f87d87af82cb1657dab51d1583b40[rehpic!]"
+  ...
+  "callbacks": [
+    "##ENVIRONMENT_URL##/auth/callback"
+  ],
+  "jwt_configuration": {
+    "lifetime_in_seconds": ##JWT_TIMEOUT##,
+    "secret_encoded": true
+  }
+  ...
 }
 ```
 
-The extension will decrypt all encrypted secrets automatically.
+![](/media/articles/extensions/deploy-extensions/mappings.png)
 
 ## Track deployments
 

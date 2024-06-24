@@ -1,5 +1,4 @@
 ---
-title: OIDC-conformant applications
 description: List of breaking changes for OIDC-conformant applications
 topics:
   - api-authentication
@@ -10,7 +9,7 @@ useCase:
   - call-api
 ---
 
-# OIDC-conformant applications
+# OIDC-Conformant Applications
 
 <%= include('./_about.md') %>
 
@@ -21,7 +20,7 @@ In order to make the transition to the [OIDC-conformant authentication pipeline]
 The objective of this flag is to disable as many legacy features as possible, so you can run into the OIDC-conformant pipeline's breaking changes at configuration time rather than run time.
 Enabling this flag on an application will have the following effects:
 
-* The following features are deprecated in favor of [silent authentication](/api-auth/tutorials/adoption/implicit):
+* The following features are deprecated:
     - <dfn data-key="refresh-token">Refresh Tokens</dfn> on authentication with the [implicit grant](/api-auth/tutorials/adoption/implicit)
     - /ssodata endpoint and `getSSOData()` method from Lock/auth0.js
 * <dfn data-key="single-sign-on">[Single Sign-on (SSO)](/api-auth/tutorials/adoption/single-sign-on)</dfn> can only be performed from Auth0 login pages.
@@ -37,7 +36,7 @@ Enabling this flag on an application will have the following effects:
 * The [/oauth/access_token endpoint](/api/authentication#post-oauth-access_token), used for social authentication from native mobile applications, is disabled.
   An OIDC-conformant alternative will be added in future releases.
 * The [`scope` parameter of authentication requests](/api-auth/tutorials/adoption/scope-custom-claims) will comply to the OIDC specification:
-    - Custom claims must be namespaced and added to ID Tokens or Access Tokens via rules.
+    - Custom claims must be [namespaced](/tokens/guides/create-namespaced-custom-claims) and added to ID Tokens or Access Tokens via rules.
     - The namespace identifiers for custom claims must be **HTTP** or **HTTPS** URIs.
     - Custom <dfn data-key="scope">scope</dfn> values can be defined by a [resource server (API)](/api-auth/tutorials/adoption/api-tokens).
 * OIDC-conformant applications cannot be the source or target application of a [delegation request](/api-auth/tutorials/adoption/delegation).
@@ -53,6 +52,6 @@ If your application doesn't need a resource server but you want opt-in to the ne
 https://${account.namespace}/userinfo
 ```
 
-## Further reading
+## Keep reading
 
 <%= include('./_index.md') %>

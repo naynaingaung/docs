@@ -1,6 +1,9 @@
 # Account Linking
-
 ## Link
+
+::: warning
+This endpoint is **deprecated** for account linking. The [POST /api/v2/users/{id}/identities](/api/management/v2#!/Users/post_identities) should be used instead. For more information refer to the [Migration Notice](/migrations/past-migrations#account-linking-removal).
+:::
 
 ```http
 GET https://${account.namespace}/authorize?
@@ -17,10 +20,6 @@ GET https://${account.namespace}/authorize?
   "path": "/authorize",
   "link": "#link"
 }) %>
-
-::: warning
-This endpoint is **deprecated** for account linking. The [POST /api/v2/users/{id}/identities](/api/management/v2#!/Users/post_identities) should be used instead. For more information refer to the [Migration Notice](/migrations/past-migrations#account-linking-removal).
-:::
 
 Call this endpoint when a user wants to link a second authentication method (for example, a user/password database connection, with Facebook).
 
@@ -43,11 +42,11 @@ This endpoint will trigger the login flow to link an existing account with a new
 - The `redirect_uri` value must be specified as a valid <dfn data-key="callback">callback URL</dfn> under your [Application's Settings](${manage_url}/#/applications).
 
 
-### More Information
+### Learn More
 
-- [Linking Accounts](/link-accounts)
-- [User Initiated Account Linking](/link-accounts/user-initiated-linking)
-- [Account Linking from Server Side Code](/link-accounts/suggested-linking)
+- [Link User Accounts](/users/guides/link-user-accounts)
+- [Link User Accounts Initiated by Users Scenario](/users/references/link-accounts-user-initiated-scenario)
+- [Link User Accounts Server-Side Scenario](/users/references/link-accounts-server-side-scenario)
 
 
 ## Unlink
@@ -109,11 +108,6 @@ Given a logged-in user's `access_token` and `user_id`, this endpoint will unlink
 | `user_id`<br/><span class="label label-danger">Required</span>        | The logged-in user's `user_id` |
 
 
-### Test with Postman
+### Learn More
 
-<%= include('../../../_includes/_test-with-postman') %>
-
-
-### More Information
-
-- [Unlinking Accounts](/link-accounts#unlinking-accounts)
+- [Unlink User Accounts](/users/guides/unlink-user-accounts)

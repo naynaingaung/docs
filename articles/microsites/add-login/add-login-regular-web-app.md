@@ -3,6 +3,7 @@ title: Add Login to Your Regular Web App
 description: Everything you need to know to implement login for a regular web app
 ctaText: Go to Quickstart
 ctaLink: /docs/quickstart/webapp
+public: false
 template: microsite
 topics:
   - authentication
@@ -45,7 +46,8 @@ For security in server-side web apps, Auth0 uses the [Authorization Code Flow](/
 ::: guides
   * [Auth0 Regular Web App Quickstarts](/quickstart/webapp)
   * [Add login using the Authorization Code Flow](/flows/guides/auth-code/add-login-auth-code)
-  * [Customize the hosted login page](/hosted-pages/login#how-to-customize-your-login-page)
+  * [Customize the universal login page](/universal-login)
+  * [Token Storage](/tokens/concepts/token-storage)
 :::
 
 ::: references
@@ -55,9 +57,8 @@ For security in server-side web apps, Auth0 uses the [Authorization Code Flow](/
 
 ::: concepts  
   * [Universal vs. Embedded Login](/guides/login/universal-vs-embedded)
-  * [ID Tokens](/tokens/id-token)
-  * [Access Tokens](/tokens/overview-access-tokens)
-  * [Where to store tokens](/security/store-tokens)
+  * [ID Tokens](/tokens/concepts/id-tokens)
+  * [Access Tokens](/tokens/concepts/access-tokens)
 :::
 
 ::::

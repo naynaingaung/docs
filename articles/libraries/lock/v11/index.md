@@ -15,7 +15,7 @@ useCase:
 ---
 # Lock v11 for Web
 
-Lock is an embeddable login form, [configurable to your needs](/libraries/lock/v11/configuration), and recommended for use in single-page apps. It enables you to easily add social identity providers, so that your users can login seamlessly using any provider they want.
+Lock is an embeddable login form that can be [configured to your needs](/libraries/lock/v11/configuration) and is recommended for use in single-page apps, preferably in conjunction with [Universal Login](/universal-login), which should be used whenever possible. Lock enables you to easily add social identity providers, so that your users can log in seamlessly using any desired provider.
 
 <%= include('../../../_includes/_embedded_login_warning') %>
 
@@ -77,7 +77,7 @@ Make sure you read about the [limitations of cross-origin authentication](/cross
 
 ### 1. Initializing Lock
 
-First, you'll need to initialize a new `Auth0Lock` object, and provide it with your Auth0 client ID (the unique client ID for each Auth0 application, which you can get from the [management dashboard](${manage_url})) and your Auth0 domain (for example `yourname.auth0.com`).
+First, you'll need to initialize a new `Auth0Lock` object, and provide it with your Auth0 client ID (the unique client ID for each Auth0 application, which you can get from the [management dashboard](${manage_url})) and your Auth0 domain (for example, `yourname.auth0.com`).
 
 ```js
 // Initializing our Auth0Lock

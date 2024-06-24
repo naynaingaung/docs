@@ -2,12 +2,18 @@
 description: Authentication and delegated authorization for desktop and mobile applications and a public client overview.
 classes: video-page
 image: https://cdn2.auth0.com/docs/media/articles/learn-identity/learn-identity-og-image.jpg
+public: false
 ---
+<!-- markdownlint-disable-->
 # Desktop and Mobile Apps
 
 Authentication and delegated authorization for desktop and mobile applications and a public client overview.
 
 <div class="video-wrapper" data-video="dq3c4pz9lb"></div>
+
+## Related Identity Lab
+
+[<i class="icon icon-budicon-529"></i> Lab 3: Mobile Applications](/identity-labs/03-mobile-native-app)
 
 ## Jump to Section
 

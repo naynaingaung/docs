@@ -25,7 +25,7 @@ Various grant types are valid when registering Auth0 Applications. These can be 
 | `authorization_code` | [Authorization Code Grant](/flows/concepts/auth-code) |
 | `client_credentials` | [Client Credentials Grant](/flows/concepts/client-credentials) |
 | `password` | [Resource Owner Password Grant](/api-auth/grant/password) |
-| `refresh_token` | [Use a Refresh Token](/tokens/refresh-token/current#use-a-refresh-token) |
+| `refresh_token` | [Use Refresh Tokens](/tokens/guides/use-refresh-tokens) |
 |  `urn:ietf:params:oauth:grant-type:device_code` | [Device Authorization Grant](/flows/concepts/device-auth) |
 
 ## Auth0 extension grants
@@ -33,9 +33,10 @@ Various grant types are valid when registering Auth0 Applications. These can be 
 | `grant_type` | More info |
 |:-----|:----|
 | `http://auth0.com/oauth/grant-type/password-realm` | [Use an extension grant similar to the Resource Owner Password Grant that includes the ability to indicate a specific realm](/api-auth/grant/password#realm-support) |
-| `http://auth0.com/oauth/grant-type/mfa-oob` | [Multi-factor Authentication OOB Grant Request](/api-auth/tutorials/multifactor-resource-owner-password#mfa-oob-grant-request) |
-| `http://auth0.com/oauth/grant-type/mfa-otp` | [Multi-factor Authentication OTP Grant Request](/api-auth/tutorials/multifactor-resource-owner-password#mfa-otp-grant-request) |
-| `http://auth0.com/oauth/grant-type/mfa-recovery-code` | [Multi-factor Authentication Recovery Grant Request](/api-auth/tutorials/multifactor-resource-owner-password#mfa-recovery-grant-request) |
+| `http://auth0.com/oauth/grant-type/mfa-oob` | [Multi-factor Authentication OOB Grant Request](/mfa/guides/mfa-api/multifactor-resource-owner-password#mfa-oob-grant-request) |
+| `http://auth0.com/oauth/grant-type/mfa-otp` | [Multi-factor Authentication OTP Grant Request](/mfa/guides/mfa-api/multifactor-resource-owner-password#mfa-otp-grant-request) |
+| `http://auth0.com/oauth/grant-type/mfa-recovery-code` | [Multi-factor Authentication Recovery Grant Request](/mfa/guides/mfa-api/multifactor-resource-owner-password#mfa-recovery-grant-request) |
+| `http://auth0.com/oauth/grant-type/passwordless/otp` | [Embedded Passwordless Login Grant Request](/connections/passwordless#implementing-login) |
 
 ## Auth0 legacy grants
 

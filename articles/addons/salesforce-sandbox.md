@@ -2,6 +2,7 @@
 addon: Salesforce (sandbox)
 title: Salesforce (Sandbox) Add-on
 thirdParty: true
+public: false
 url: /addons/salesforce-sandbox
 alias:
   - salesforce
@@ -15,6 +16,8 @@ contentType: how-to
 ---
 
 # Salesforce (Sandbox) Add-on
+
+<%= include('../_includes/_uses-delegation') %>
 
 Auth0 supports both the __production__ connection to Salesforce and the __Sandbox__, the only difference being the endpoints hosted by Salesforce: `https://login.salesforce.com` and `https://test.salesforce.com`, respectively.
 

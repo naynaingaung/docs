@@ -19,7 +19,7 @@ useCase:
 ---
 # Device Authorization Flow
 
-With input-constrained devices that connect to the internet, rather than authenticate the user directly, the device asks the user to go to a link on their computer or smartphone and authorize the device. This avoids a poor user experience for devices that do not have an easy way to enter text. To do this, device apps use the Device Authorization Flow (drafted in [OAuth 2.0](https://tools.ietf.org/html/draft-ietf-oauth-device-flow-15)), in which they pass along their Client ID to initiate the authorization process and get a token.
+With input-constrained devices that connect to the internet, rather than authenticate the user directly, the device asks the user to go to a link on their computer or smartphone and authorize the device. This avoids a poor user experience for devices that do not have an easy way to enter text. To do this, device apps use the Device Authorization Flow (ratified in [OAuth 2.0](https://tools.ietf.org/html/rfc8628)), in which they pass along their Client ID to initiate the authorization process and get a token.
 
 ## How it works
 
@@ -54,10 +54,10 @@ The easiest way to implement the Device Authorization Flow is to follow our tuto
 
 ## Force device reauthorization
 
-To force the user to reauthorize a device, you must revoke the [Refresh Token](/tokens/refresh-token/current#revoke-a-refresh-token) assigned to the device. To learn how, see [Unlink Devices from Users](/dashboard/guides/users/unlink-user-devices). Note that the device will not be forced to reauthorize until the current Access Token expires and the application tries to use the revoked Refresh Token.
+To force the user to reauthorize a device, you must revoke the [Refresh Token](/tokens/guides/revoke-refresh-tokens) assigned to the device. To learn how, see [Unlink Devices from Users](/dashboard/guides/users/unlink-user-devices). Note that the device will not be forced to reauthorize until the current Access Token expires and the application tries to use the revoked Refresh Token.
 
 ## Keep reading
 
-- Auth0 offers many ways to customize your tokens using [rules](/rules) and [hooks](/hooks).
-- [Tokens used by Auth0](/tokens)
-
+- Learn how to personalize your user's login experience using [rules](/rules) and [hooks](/hooks)
+- Learn more about [tokens](/tokens) and [token storage](/tokens/concepts/token-storage)
+- Explore [Which OAuth 2.0 Flow Should I Use?](/api-auth/which-oauth-flow-to-use)

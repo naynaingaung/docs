@@ -3,6 +3,7 @@ title: Add Login to Your Native/Mobile App
 description: Everything you need to know to implement login for a native/mobile app
 ctaText: Go to Quickstart
 ctaLink: /docs/quickstart/native
+public: false
 template: microsite
 topics:
   - authentication
@@ -42,7 +43,6 @@ For security in native/mobile devices, Auth0 uses the [Authorization Code Flow w
 
 :::
 
-
 ## Alternative: Use Embedded Login
 
 While we strongly recommend that you use our hosted universal login page, if you prefer to embed your own login pages within your native/mobile app, you can implement our login widget (Lock UI) directly into your app with our:
@@ -55,7 +55,11 @@ While we strongly recommend that you use our hosted universal login page, if you
 ::: guides
   * [Auth0 Mobile/Native App Quickstarts](/quickstart/native)
   * [Add login using the Authorization Code Flow with PKCE](/flows/guides/auth-code-pkce/add-login-auth-code-pkce)
-  * [Customize the hosted login page](/hosted-pages/login#how-to-customize-your-login-page)
+  * [Add Facebook Login to Native Apps](/connections/nativesocial/facebook)
+  * [Add Sign In with Apple to Native iOS Apps](/connections/nativesocial/apple)
+  * [Embedded Passwordless Login in Native Applications](/connections/passwordless/embedded-login-native)
+  * [Customize the universal login page](/universal-login)
+  * [Token Storage](/tokens/concepts/token-storage)
 :::
 
 ::: references
@@ -65,9 +69,8 @@ While we strongly recommend that you use our hosted universal login page, if you
 
 ::: concepts  
   * [Universal vs. Embedded Login](/guides/login/universal-vs-embedded)
-  * [ID Tokens](/tokens/id-token)
+  * [ID Tokens](/tokens/concepts/id-tokens)
   * [Access Tokens](/tokens/access-token)
-  * [Where to store tokens](/security/store-tokens)
 :::
 
 ::::

@@ -2,6 +2,7 @@
 title: Manage Users and User Profiles
 description: An introduction to how Auth0 helps you manage users and their profile information
 contentType: microsite
+public: false
 topics:
   - users
   - user-management
@@ -43,7 +44,7 @@ There are several ways you can modify information in a user profile or an ID Tok
 ::: concepts
   * [User Management](/users)
   * [User Profiles](/users/concepts/overview-user-profile)
-  * [User Metadata](/users/concepts/overview-user-metadata)
+  * [Metadata](/users/concepts/overview-user-metadata)
   * [Normalized User Profiles](/users/normalized)
  :::
 

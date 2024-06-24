@@ -2,6 +2,7 @@
 url: /addons
 title: Add-ons
 description: Learn about add-ons and how they are related to Auth0-registered Applications.
+public: false
 topics:
   - applications
   - add-ons
@@ -14,6 +15,8 @@ useCase:
 ---
 
 # Add-ons
+
+<%= include('../_includes/_uses-delegation') %>
 
 Add-ons are plugins associated with an application registered with Auth0. Usually, they are third-party APIs used by application(s) for which Auth0 generates Access Tokens (e.g., Salesforce, Azure Service Bus, Windows Azure Mobile Services, SAP).
 

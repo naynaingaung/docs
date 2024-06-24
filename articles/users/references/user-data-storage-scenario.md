@@ -113,6 +113,9 @@ The first rule sends a request to our Node API, which then queries the database 
 
 ```js
 function (user, context, callback) {
+
+  var request = require('request');
+
   user.app_metadata = user.app_metadata || {};
   user.app_metadata.roles = user.roles || [];
 
@@ -205,7 +208,7 @@ The user's unique identifier is their [user_id](/users/normalized#storing-user-d
 The Node.js backend authenticates requests to the URI associated with getting the user’s personal data from the database by validating a JSON Web Token.
 
 ::: note
-[Learn about token-based authentication and how to implement JWT in your Applications.](/jwt)
+[Learn about token-based authentication and how to implement JWT in your Applications.](/tokens/concepts/jwts)
 :::
 
 Here is the code implementing JWT validation from the [Node.js seed project](/quickstart/backend/nodejs):
@@ -218,7 +221,8 @@ var displayName = require('./routes/displayName');
 
 var authenticate = jwt({
   secret: process.env.AUTH0_CLIENT_SECRET,
-  audience: process.env.AUTH0_CLIENT_ID
+  audience: process.env.AUTH0_CLIENT_ID,
+  algorithms: ['RS256']
 });
 
 app.use('/genres', authenticate, genres);
@@ -270,5 +274,4 @@ function queryGenre(user_id, res){
 ## Keep reading
 
 * [User Data Storage Best Practices](/best-practices/user-data-storage-best-practices)
-* [Metadata Field Name Rules](/users/references/metadata-field-name-rules)
 * [Rules](/rules)

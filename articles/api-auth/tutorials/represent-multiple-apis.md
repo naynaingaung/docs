@@ -1,19 +1,19 @@
 ---
-title: Represent Multiple APIs Using a Single Logical API in Auth0
-description: How to use a single logical API in Auth0 to represent and control access to multiple APIs.
+
+description: Learn how to use a single logical API in Auth0 to represent and control access to multiple APIs.
 topics:
   - api-authentication
   - oidc
   - apis
   - scopes
   - permissions
-contentType: tutorial
+contentType: how-to
 useCase:
   - secure-api
   - call-api
 ---
 
-# Represent Multiple APIs Using a Single Logical API in Auth0
+# Represent Multiple APIs Using a Single Logical API
 
 If you have multiple distinct API implementations that are all logically a part of the same API, you can simplify your authorization process by representing them with a single logical [API](/apis) in the Auth0 Dashboard. Doing this allows you to implement just one authorization flow, while still controlling access to the individual APIs by assigning the appropriate <dfn data-key="scope">scopes</dfn>.
 
@@ -26,7 +26,7 @@ The sample application uses a microservices architecture and contains:
 * 1 Single-Page Application (SPA)
 * 2 APIs (services), called `contacts` and `calendar`
 
-We will represent the two APIs using just one Auth0 API called `Organizer Service`. We will then create two namespaced scopes to demonstrate how you can use the [Implicit Flow](/flows/concepts/implicit) to access the `calendar` and `contacts` APIs from the SPA.
+We will represent the two APIs using just one Auth0 API called `Organizer Service`. We will then create two scopes to demonstrate how you can use the [Implicit Flow](/flows/concepts/implicit) to access the `calendar` and `contacts` APIs from the SPA.
 
 ## Prerequisites
 
@@ -72,7 +72,7 @@ Register a single logical [API](/apis) that you will use to represent the multip
 
 2. When prompted, provide a **name** and **identifier** for the new API, and choose the **signing algorithm** for the tokens obtained for this API.
 
-For the purpose of this sample, we'll call our API `Organizer Service` and set its unique identifier to `organize`. By default, the signing algorithm for the tokens obtained for this API is **RS256**, which we will leave as is.
+For the purpose of this sample, we'll call our API `Organizer Service` and set its unique identifier to `organize`. By default, the [signing algorithm](/tokens/concepts/signing-algorithms) for the tokens obtained for this API is **RS256**, which we will leave as is.
 
 When finished, click **Create**.
 

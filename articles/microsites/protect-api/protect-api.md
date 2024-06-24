@@ -8,6 +8,7 @@ topics:
   - apis
 useCase:
   - secure-api
+public: false
 ---
 
 Using Auth0 to protect your API means that you will be "outsourcing" the authentication process to a centralized service that will help you ensure only approved applications can access your data. The calling application will authenticate the user, and Auth0 will generate tokens that can be passed to your API. Auth0 can also help you verify the tokens you receive from the applications that call your API.
@@ -41,7 +42,7 @@ Your API will receive a request including an Access Token: 
 ::: guides
   * [Configure an API](/apis#how-to-configure-an-api-in-auth0)
   * [Auth0 Backend/API Quickstarts](/quickstart/backend)
-  * [Verify Access Tokens for custom APIs](/api-auth/tutorials/verify-access-token)
+  * [Validate an Access Token for custom APIs](/tokens/guides/validate-access-tokens)
 :::
 
 ::: references
@@ -50,9 +51,9 @@ Your API will receive a request including an Access Token: 
 :::
 
 ::: concepts  
-  * [Access Tokens](/tokens/overview-access-tokens)
+  * [Tokens](/tokens)
+  * [Access Tokens](/tokens/concepts/access-tokens)
   * [Scopes](/scopes)
-  * [Why you should always use Access Tokens to secure an API](/api-auth/why-use-access-tokens-to-secure-apis)
   * [Dynamic client registration](/api-auth/dynamic-client-registration)
 :::
 

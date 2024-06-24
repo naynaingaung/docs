@@ -14,7 +14,7 @@ useCase: migrate
 
 # Migration in Embedded Login Scenarios with Single Sign-On
 
-Migration from legacy versions of Lock and Auth0.js is required. For <dfn data-key="single-sign-on">Single Sign-on (SSO)</dfn> scenarios, it will imply moving to [Universal Login](/hosted-pages/login) in most cases. 
+Migration from legacy versions of Lock and Auth0.js is required. For <dfn data-key="single-sign-on">Single Sign-on (SSO)</dfn> scenarios, it will imply moving to [Universal Login](/universal-login) in most cases. 
 
 ## Single-Page Apps
 
@@ -32,4 +32,4 @@ Web Applications using embedded login that require SSO need to [migrate to Unive
 
 The proper way of implementing embedded login for web applications is by creating a custom form that POSTs credentials to the web application. The web application then validates them with Auth0 using the [/oauth/token endpoint](/api-auth/tutorials/password-grant). 
 
-This approach does not allow for the creation of an SSO session, as the Auth0 server cannot set a cookie in the end-user’s browser. It also prevents Auth0 from performing [Anomaly Detection](/anomaly-detection/references/anomaly-detection-restrictions-limitations).
+This approach does not allow for the creation of an SSO session, as the Auth0 server cannot set a cookie in the end-user’s browser. It also prevents Auth0 from performing [Anomaly Detection](/anomaly-detection).

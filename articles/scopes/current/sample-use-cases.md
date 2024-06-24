@@ -41,7 +41,7 @@ Notice that in this example:
 
 2. After the user consents (if necessary) and Auth0 redirects back to your app, request tokens. (For details, refer to [Add Login to Regular Web Applications: Request Tokens](/flows/guides/auth-code/add-login-auth-code#request-tokens).)
 
-3. Extract the ID Token from the response and [decode it](/tokens/id-token#id-token-payload).
+3. Extract the ID Token from the response and [decode it](/tokens/id-tokens#id-token-payload).
 
 You should see the following claims:
 
@@ -134,22 +134,24 @@ Notice that in this example:
 
 2. As in the previous examples, after the user consents (if necessary) and Auth0 redirects back to your app, request tokens. (For details, refer to [Add Login to Regular Web Applications: Request Tokens](/flows/guides/auth-code/add-login-auth-code#request-tokens).)
 
-3. Extract the ID Token from the response, [decode it](/tokens/id-token#id-token-payload), and retrieve the user attributes and use them to personalize your UI.
+3. Extract the ID Token from the response, [decode it](/tokens/id-tokens#id-token-payload), and retrieve the user attributes and use them to personalize your UI.
 
 4. Extract the Access Token from the response, and call the API using the Access Token as credentials.
 
 
 ## Add custom claims to a token
 
-In this example, we add a user's favorite color and preferred contact method to the ID Token. To do this, we create a [rule](/rules) to customize the token by adding these claims using a namespaced format. Once added, we will also be able to obtain the custom claims when calling the `/userinfo` endpoint (though the rule will run only during the authentication process).
+In this example, we add a user's favorite color and preferred contact method to the ID Token. To do this, we create a [rule](/rules) to customize the token by adding these claims using a [namespaced format](/tokens/guides/create-namespaced-custom-claims). Once added, we will also be able to obtain the custom claims when calling the `/userinfo` endpoint (though the rule will run only during the authentication process).
+
+<%= include('../../_includes/_enforce-claim-namespacing') %>
 
 Suppose that:
 
-* The user logged in using an identity provider that returned a `favorite_color` claim as part of the user profile.
+* The user logged in using an identity provider that returned a `favorite_color` claim as part of their user profile.
 * At some point, the user selected a `preferred_contact` method of `email`, and we saved it as part of the [user's `user_metadata`](/users/concepts/overview-user-metadata).
 * We've used the Auth0 Management API to set application-specific information for this user.
 
-In this case, the Auth0-stored profile is:
+In this case, the Auth0-stored [normalized user profile](/users/normalized) is:
 
 ```json
 {
@@ -163,10 +165,29 @@ In this case, the Auth0-stored profile is:
 }
 ```
 
-Create a rule to customize the token:
+For this profile, Auth0 would normally return the following ID Token claims to your application:
+
+```json
+{
+  "email": "jane@example.com",
+  "email_verified": true,
+  "iss": "https://my-domain.auth0.com/",
+  "sub": "custom|123",
+  "aud": "my_client_id",
+  "iat": 1311280970,
+  "exp": 1311281970
+}
+```
+
+Notice that in this example:
+
+ * the `sub` claim contains the value of the `user_id` property
+ * neither the `favorite_color` nor `user_metadata` properties are present because OpenID Connect (OIDC) does not define standard claims that represent `favorite_color` or `user_metadata`
+ 
+To receive the custom data, create a rule to customize the token with [namespaced](/tokens/guides/create-namespaced-custom-claims) [custom claims](/tokens/concepts/jwt-claims#custom-claims) that represent these properties from the user profile. Custom data will be available in the token after all rules have run.
 
 ```js
-function (user, context, callback) {
+function(user, context, callback) {
   const namespace = 'https://myapp.example.com/';
   context.idToken[namespace + 'favorite_color'] = user.favorite_color;
   context.idToken[namespace + 'preferred_contact'] = user.user_metadata.preferred_contact;
@@ -175,18 +196,34 @@ function (user, context, callback) {
 ```
 
 ::: note
-This example shows a custom claim being added to an ID Token, which uses the `context.idToken` property. To add to an Access Token, use the `context.accessToken` property instead.
+This example shows custom claims being added to an ID Token, which uses the `context.idToken` property. To add to an Access Token, use the `context.accessToken` property instead. To learn more, see [Context Object in Rules](/rules/references/context-object).
 :::
 
 ::: warning
 When creating your rule, make sure to set some logic that determines when to include additional claims. Injecting custom claims into every ID Token that is issued is not ideal.
 :::
 
+With this rule enabled, Auth0 will include the `favorite_color` and `preferred_contact` custom claims in the ID Token:
+
+```json
+{
+  "https://myapp.example.com/favorite_color": "blue",
+  "https://myapp.example.com/preferred_contact": "email",
+  "email": "jane@example.com",
+  "email_verified": true,
+  "iss": "https://my-domain.auth0.com/",
+  "sub": "custom|123",
+  "aud": "my_client_id",
+  "iat": 1311280970,
+  "exp": 1311281970
+}
+```
+
 ## Keep reading
 
 - [Scopes](/scopes)
 - [OpenID Connect (OIDC) Scopes](/scopes/current/oidc-scopes)
-- [Custom Claims](/scopes/current/custom-claims)
+- [Custom Claims](/tokens/concepts/jwt-claims#custom-claims)
 - [API Scopes](/scopes/current/api-scopes)
 - [Add API Permissions (Scopes)](/dashboard/guides/apis/add-permissions-apis)
 - [Customize the Consent Prompt](/scopes/current/guides/customize-consent-prompt)

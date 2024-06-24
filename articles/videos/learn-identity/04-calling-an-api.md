@@ -2,12 +2,18 @@
 description: How to obtain and use access and refresh tokens for delegated authorization in a traditional web application.
 classes: video-page
 image: https://cdn2.auth0.com/docs/media/articles/learn-identity/learn-identity-og-image.jpg
+public: false
 ---
+<!-- markdownlint-disable-->
 # Calling an API
 
 How to obtain and use access and refresh tokens for delegated authorization in a traditional web application.
 
 <div class="video-wrapper" data-video="yw6hmdhnft"></div>
+
+## Related Identity Lab
+
+[<i class="icon icon-budicon-529"></i> Lab 2: Calling an API](/identity-labs/02-calling-an-api)
 
 ## Jump to Section
 

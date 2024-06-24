@@ -59,7 +59,7 @@ Allows Lock to be dismissed by the user. By default this is `false`.
 
 #### Refresh Tokens
 
-Specifying the `offline_access` scope in your Lock options will allow a <dfn data-key="refresh-token">[Refresh Token](/tokens/refresh-token)</dfn> to be returned along with the access\_token and the id\_token. Refresh Tokens can be saved and used to acquire a new Access Token when the old one expires. For more information about using Refresh Tokens for Auth0 authentication, take a look at the reference documentation for the [Auth0.Swift SDK](/libraries/auth0-swift), which you would use to implement Refresh Tokens, or at the [Swift QuickStart Guide](/quickstart/native/ios-swift/03-user-sessions), which provides a comprehensive example of use of Auth0 in Swift development, including the management of Refresh Tokens.
+Specifying the `offline_access` scope in your Lock options will allow a <dfn data-key="refresh-token">[Refresh Token](/tokens/concepts/refresh-tokens)</dfn> to be returned along with the access\_token and the id\_token. Refresh Tokens can be saved and used to acquire a new Access Token when the old one expires. For more information about using Refresh Tokens for Auth0 authentication, take a look at the reference documentation for the [Auth0.Swift SDK](/libraries/auth0-swift), which you would use to implement Refresh Tokens, or at the [Swift Quickstart Guide](/quickstart/native/ios-swift/03-user-sessions), which provides a comprehensive example of use of Auth0 in Swift development, including the management of Refresh Tokens.
 
 ### termsOfService
 
@@ -92,6 +92,28 @@ Database connection require explicit acceptance of the Terms of Service.
 }
 ```
 
+## Web Authentication Options
+
+### leeway
+
+Clock skew used for ID token validation. It expands the time window in which the ID token will still be considered valid, to account for the difference between server time and client time. By default is **60000 milliseconds** (60 seconds).
+
+```swift
+.withOptions {
+  $0.leeway = 30000 // 30 seconds
+}
+```
+
+### maxAge
+
+Allowable elapsed time (in milliseconds) since the user last authenticated. Used for ID token validation. If set, the ID token will contain an `auth_time` claim with the authentication timestamp. Defaults to `nil`.
+
+```swift
+.withOptions {
+  $0.maxAge = 86400000 // 1 day
+}
+```
+
 ## Database options
 
 ### allow
@@ -110,7 +132,7 @@ The first screen to present to the user. The default is `.Login`, other options 
 
 ```swift
 .withOptions {
-  $0.initialScreen = .Login
+  $0.initialScreen = .login
 }
 ```
 

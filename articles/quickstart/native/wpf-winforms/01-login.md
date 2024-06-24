@@ -1,7 +1,7 @@
 ---
 title: Login
 default: true
-description: This tutorial demonstrates how to add user login to a Windows Forms C# application using Auth0.
+description: This tutorial demonstrates how to add user login to a WPF and Windows Forms C# application using Auth0.
 budicon: 448
 topics:
   - quickstarts
@@ -45,9 +45,9 @@ You can then call the `LoginAsync` method to log the user in:
 
 ${snippet(meta.snippets.use)}
 
-![](/media/articles/native-platforms/wpf-winforms/wpf-winforms-step1.png)
+![](/media/articles/native-platforms/wpf-winforms/universal-login.png)
 
-This will load the Auth0 login page into a web view. You can learn how to customize the login page in [this document](/hosted-pages/login#how-to-customize-your-login-page).
+This will load the Auth0 login page into a web view. You can learn how to customize the login page in [this document](/universal-login#simple-customization).
 
 ## Handle Authentication Tokens
 
@@ -58,13 +58,11 @@ The returned login result will indicate whether authentication was successful, a
 You can check the `IsError` property of the result to see whether the login has failed. The `ErrorMessage` will contain more information regarding the error which occurred.
 
 ```csharp
-// Form1.cs
-
 var loginResult = await client.LoginAsync();
 
 if (loginResult.IsError)
 {
-    Debug.WriteLine($"An error occurred during login: {loginResult.Error}")
+    Debug.WriteLine($"An error occurred during login: {loginResult.Error}");
 }
 ```
 
@@ -73,8 +71,6 @@ if (loginResult.IsError)
 On successful login, the login result will contain the ID Token and Access Token in the `IdentityToken` and `AccessToken` properties respectively.
 
 ```csharp
-// Form1.cs
-
 var loginResult = await client.LoginAsync();
 
 if (!loginResult.IsError)
@@ -91,8 +87,6 @@ On successful login, the login result will contain the user information in the `
 To obtain information about the user, you can query the claims. You can for example obtain the user's name and email address from the `name` and `email` claims:
 
 ```csharp
-// Form1.cs
-
 if (!loginResult.IsError)
 {
     Debug.WriteLine($"name: {loginResult.User.FindFirst(c => c.Type == "name")?.Value}");
@@ -107,8 +101,6 @@ The exact claims returned will depend on the scopes that were requested. For mor
 You can obtain a list of all the claims contained in the ID Token by iterating through the `Claims` collection:
 
 ```csharp
-// Form1.cs
-
 if (!loginResult.IsError)
 {
     foreach (var claim in loginResult.User.Claims)
@@ -123,6 +115,5 @@ if (!loginResult.IsError)
 To log the user out call the `LogoutAsync` method.
 
 ```csharp
-// Form1.cs
 await client.LogoutAsync();
 ```

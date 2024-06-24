@@ -76,7 +76,7 @@ curl --request POST \
   "link": "#signup"
 }) %>
 
-Given a user's credentials, and a `connection`, this endpoint will create a new user using active authentication.
+Given a user's credentials and a `connection`, this endpoint creates a new user.
 
 This endpoint only works for database connections. 
 
@@ -97,16 +97,12 @@ This endpoint only works for database connections.
 | `picture` | A URI pointing to the user's picture. |
 | `user_metadata` | The [user metadata](/users/concepts/overview-user-metadata) to be associated with the user. If set, the field must be an object containing no more than ten properties. Property names can have a maximum of 100 characters, and property values must be strings of no more than 500 characters. |
 
-### Test with Postman
-
-<%= include('../../_includes/_test-with-postman') %>
-
 
 ### Remarks
 - The sample auth0.js script uses the library version 8. If you are using auth0.js version 7, please see this [reference guide](/libraries/auth0js/v7).
 
 
-### More Information
+### Learn More
 
 - [Password Strength in Auth0 Database Connections](/connections/database/password-strength)
 - [Password Options in Auth0 Database Connections](/connections/database/password-options)

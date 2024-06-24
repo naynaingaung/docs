@@ -119,7 +119,7 @@ Successful calls to the endpoint return a JSON object similar to the following:
 
 ## Limitations
 
-This endpoint allows you to retrieve a maximum of 1000 users. If your results exceed this threshold, redefine your search. If you need a complete export of all of your users, instead use the [export job](/api/management/v2#!/Jobs/post_users_exports) or the [User Import / Export](/extensions/user-import-export) extension.
+This endpoint allows you to retrieve a maximum of 1000 users (if the `page` parameter is set; if not set, we return a maximum of 50 users). If your results exceed this threshold, redefine your search. If you need a complete export of all of your users, instead use the [export job](/api/management/v2#!/Jobs/post_users_exports) or the [User Import / Export](/extensions/user-import-export) extension.
 
 If you get the error `414 Request-URI Too Large` this means that your query string is larger than the supported length. In this case, refine your search.
 
@@ -128,7 +128,7 @@ We do **not** recommend that you use this endpoint for:
 * Operations that require immediate consistency. Instead, use the [Get Users by Email endpoint](/users/search/v3/get-users-by-email-endpoint) or the [Get Users by ID endpoint](/users/search/v3/get-users-by-id-endpoint).
 * User exports. Instead, use the [User Export endpoint](/users/guides/bulk-user-exports).
 * Operations that require user search as part of authentication processes. Instead, use the [Get Users by Email endpoint](/users/search/v3/get-users-by-email-endpoint) or the [Get Users by ID endpoint](/users/search/v3/get-users-by-id-endpoint).
-* Searching for Users for [Account Linking](/link-accounts) by Email. Instead, use the [Get Users by Email endpoint](/users/search/v3/get-users-by-email-endpoint).
+* Searching for Users for [Account Linking](/users/concepts/overview-user-account-linking) by Email. Instead, use the [Get Users by Email endpoint](/users/search/v3/get-users-by-email-endpoint).
 
 ## Keep reading
 
@@ -138,4 +138,4 @@ We do **not** recommend that you use this endpoint for:
 * [Migrate from Search V2 to V3](/users/search/v3/migrate-search-v2-v3)
 * [User Search Query Syntax](/users/search/v3/query-syntax)
 * [Search Best Practices](/best-practices/search-best-practices)
-* [Management API Explorer](/api/management/v2#!/users/get_users)
+* [Management API Explorer](/api/management/v2#!/Users/get_users)

@@ -3,6 +3,7 @@ title: Call Your API from Your Regular Web App
 description: Everything you need to know to call your API from your regular web app
 ctaText: Go to Quickstart
 ctaLink: /docs/quickstart/webapp
+public: false
 template: microsite
 topics:
   - authentication
@@ -47,14 +48,15 @@ For server-side web apps, Auth0 uses the [Authorization Code Flow](/flows/concep
 
 The easiest way to implement the Authorization Code Flow is to [follow our Regular Web App Quickstarts](/quickstart/webapp).
 
-Or, to use our API endpoints, you can follow our tutorial: [Call Your API Using the Authorization Code Flow](/flows/guides/auth-code/call-api-auth-code).
+Or, to use our API endpoints, you can follow our tutorial: [Call Your API Using the Authorization Code Flow](/authorization/flows/call-your-api-using-the-authorization-code-flow).
 
 :::: further-reading
 
 ::: guides
   * [Auth0 Regular Web App Quickstarts](/quickstart/webapp)
-  * [Call Your API Using the Authorization Code Flow](/flows/guides/auth-code/call-api-auth-code)
+  * [Call Your API Using the Authorization Code Flow](/authorization/flows/call-your-api-using-the-authorization-code-flow)
   * [Change scopes and add custom claims to tokens using hooks](/api-auth/tutorials/client-credentials/customize-with-hooks)
+  * [Token Storage](/tokens/concepts/token-storage)
 :::
 
 ::: references
@@ -64,8 +66,7 @@ Or, to use our API endpoints, you can follow our tutorial: [Call Your API Using 
 :::
 
 ::: concepts  
-  * [Access Tokens](/tokens/overview-access-tokens)
-  * [Where to store tokens](/security/store-tokens)
+  * [Access Tokens](/tokens/concepts/access-tokens)
 :::
 
 ::::

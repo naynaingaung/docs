@@ -10,11 +10,13 @@ useCase:
 ---
 # Migration Guide for Resource Owner Password Credentials Exchange
 
-Support for Resource Owner Password was added to [oauth/token](/api/authentication#authorization-code) and usage of the [oauth/ro](/api/authentication#resource-owner) endpoint will be deprecated at some point in the future.
+Support for Resource Owner Password was added to [oauth/token](/api/authentication#authorization-code). Usage of the [oauth/ro](/api/authentication#resource-owner) endpoint was deprecated on July 08, 2017.
 
 ## Does this affect me ?
 
-This guide is for users who use the resource owner password credentials exchange, and call /oauth/ro directly, without the use of any Auth0 libraries or SDKs. The major Auth0 libraries such as <dfn data-key="lock">[Lock](/libraries/lock)</dfn> or [Auth0.js](/libraries/auth0js) have already been updated to stop using /oauth/ro internally. If you use the `lock-passwordless` library, you can now use [Passwordless Mode](/libraries/lock/v11#passwordless) in Lock v11 instead.
+This change affects you if you use the resource owner password credentials exchange, and call `/oauth/ro` directly, without the use of any Auth0 libraries or SDKs. The major Auth0 libraries such as <dfn data-key="lock">[Lock](/libraries/lock)</dfn> or [Auth0.js](/libraries/auth0js) have already been updated to stop using /oauth/ro internally. If you use the `lock-passwordless` library, you can now use [Passwordless Mode](/libraries/lock/v11#passwordless) in Lock v11 instead.
+
+<%= include('./_forced-logouts.md') %>
 
 ## Changes to requests
 
@@ -73,7 +75,7 @@ Responses from `oauth/ro` were similar in format to the following:
 }
 ```
 
-* The returned <dfn data-key="access-token">Access Token</dfn> is valid for calling the [/userinfo endpoint](/api/authentication#get-user-info) (provided that the API specified by the `audience` param uses RS256 as signing algorithm) and optionally the [custom API](/api-auth/apis) if one was specified.
+* The returned <dfn data-key="access-token">Access Token</dfn> is valid for calling the [/userinfo endpoint](/api/authentication#get-user-info) (provided that the API specified by the `audience` param uses RS256 as [signing algorithm](/tokens/concepts/signing-algorithms)) and optionally the [custom API](/api-auth/apis) if one was specified.
 * The ID Token will be forcibly signed using RS256 if requested by a [public client](/clients/client-types#public-clients).
 * A <dfn data-key="refresh-token">Refresh Token</dfn> will be returned only if the `offline_access` scope was granted and the API has **Allow offline access** set.
 

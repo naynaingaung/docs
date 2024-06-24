@@ -1,7 +1,6 @@
 ---
-description: Get Access Tokens for single-page applications.
+description: Describes available scopes and endpoints for Management API tokens for Single-page Applications (SPAs).
 section: apis
-toc: true
 topics:
   - apis
   - management-api
@@ -11,83 +10,49 @@ contentType:
 useCase: invoke-api
 ---
 
-# Get Management API Tokens for Single-Page Applications
+# Get Management API Tokens for Single-page Applications
 
-To call Auth0's [Management API](/api/management/v2#!) endpoints, you need to authenticate with a specialized <dfn data-key="access-token">Access Token</dfn> called the Auth0 Management API Token. This token is a <dfn data-key="json-web-token">JSON Web Token (JWT)</dfn> and contains specific granted permissions (also known as <dfn data-key="scope">scopes</dfn>. Because single-page applications (SPAs) are public clients, they cannot securely store sensitive information, such as the **Client Secret**, so they cannot retrieve this token in the same way as other application types.
+In certain cases, you may want to use Auth0's [Management API](/api/management/v2#!) to manage your applications and APIs rather than the Auth0 Management Dashboard. 
 
-SPAs can still retrieve tokens for the Management API, but they must do so from the frontend, and the Access Token will be issued in the context of the user who is currently signed in to Auth0. Although this restricts the token to certain scopes and limits updates to only the logged-in user's data, it can be useful for actions such as updating the user profile. 
+To call any Management API endpoints, you must authenticate using a specialized <dfn data-key="access-token">[Access Token](/tokens/overview-access-tokens)</dfn> called the Management API Token. Management API Tokens are <dfn data-key="json-web-token">[JSON Web Tokens (JWTs)](/tokens/concepts/jwts)</dfn> that contain specific granted permissions (also known as <dfn data-key="scope">scopes</dfn>) for the Management API endpoints you want to call. 
 
-With a Management API Token issued for a SPA, you can access the following scopes, and hence endpoints:
+## Limitations
 
-| **Scope for current user** | **Endpoint** |
+Since single-page applications (SPAs) are public clients and cannot securely store sensitive information (such as a **Client Secret**), they must retrieve Management API Tokens from the frontend, unlike other [application types](/applications). This means that Management API Tokens for SPAs have certain limitations. Specifically, they are issued in the context of the user who is currently signed in to Auth0 which limits updates to only the logged-in user's data. Although this restricts use of the Management API, it can still be used to perform actions related to updating the logged-in user's user profile.
+
+::: warning
+Auth0 does not recommend putting Management API Tokens on the frontend that allow users to change user metadata. This can allow users to manipulate their own metadata in a way that could be detrimental to the functioning of the applications. It also allows a customer to do a DoS attack against someone's management API by just spamming it and hitting rate limits.
+:::
+
+## Available scopes and endpoints
+
+With a Management API Token issued for a SPA, you can access the following scopes (and hence endpoints). 
+
+::: note
+Password changes through the [PATCH /api/v2/users/{id}](/api/management/v2#!/Users/patch_users_by_id) endpoint are **not possible** with a Management API Token issued for a SPA.
+:::
+
+| **Scope for Current User** | **Endpoint** |
 | -------------------------- | ------------ |
 | `read:current_user` | [GET /api/v2/users/{id}](/api/management/v2#!/Users/get_users_by_id) <br /> [GET /api/v2/users/{id}/enrollments](/api/management/v2#!/Users/get_enrollments) |
-| `update:current_user_identities` | [POST/api/v2/users/{id}/identities](/api/management/v2#!/Users/post_identities) <br /> [DELETE /api/v2/users/{id}/identities/{provider}/{user_id}](/api/management/v2#!/Users/delete_provider_by_user_id) |
+| `update:current_user_identities` | [POST/api/v2/users/{id}/identities](/api/management/v2#!/Users/post_identities) <br /> [DELETE /api/v2/users/{id}/identities/{provider}/{user_id}](/api/management/v2#!/Users/delete_user_identity_by_user_id) |
 | `update:current_user_metadata` | [PATCH /api/v2/users/{id}](/api/management/v2#!/Users/patch_users_by_id) |
 | `create:current_user_metadata` | [PATCH /api/v2/users/{id}](/api/management/v2#!/Users/patch_users_by_id) |
 | `delete:current_user_metadata` | [DELETE /api/v2/users/{id}/multifactor/{provider}](/api/management/v2#!/Users/delete_multifactor_by_provider) |
 | `create:current_user_device_credentials` | [POST /api/v2/device-credentials](/api/management/v2#!/Device_Credentials/post_device_credentials) |
 | `delete:current_user_device_credentials` | [DELETE /api/v2/device-credentials/{id}](/api/management/v2#!/Device_Credentials/delete_device_credentials_by_id) |
 
-## Example: Get Management API Token to retrieve user profile
-
-In this example, we retrieve a Management API Token and use it to retrieve the full user profile of the currently logged-in user.
-
-1. Authenticate the user (using the [Implicit grant](/api/authentication?http#implicit-grant)) by redirecting them to the [Authorization endpoint](/api/authentication#authorize-application), which is where users are directed upon login or sign-up:
-
-```text
-https://${account.namespace}/authorize?
-  audience=https://${account.namespace}/api/v2/
-  &response_type=token%20id_token
-  &scope=read:current_user
-  &client_id=${account.clientId}
-  &redirect_uri=${account.callback}
-  &nonce=NONCE
-  &state=OPAQUE_VALUE
-```
-
 ::: note
-If you are not familiar with authentication for SPAs, see [Implicit Flow](/flows/concepts/implicit).
+The above scopes and endpoints are subject to [rate limits](/policies/rate-limits#access-tokens-for-spas).
 :::
 
-Notice:
+## Use Management API Token to call Management API from a SPA
 
-- The <dfn data-key="audience">`audience`</dfn> is set to `https://${account.namespace}/api/v2/` (representing your tenant's Management API URI)
-- The `response_type` is `id_token token` (indicating that we want to receive both an ID Token as well as an Access Token, which represents the Management API Token)
-- The requested `scope` is `read:current_user`
+You can retrieve a Management API Token from a SPA and use the token to call the Management API to retrieve the full user profile of the currently logged-in user.
 
-After we receive our tokens, decoding the Access Token and reviewing its contents reveals the following:
+1. Retrieve a Management API token. Authenticate the user by redirecting them to the Authorization endpoint, which is where users are directed upon login or sign-up. When you receive the Management API Token, it will be in [JSON Web Token format](/tokens/references/jwt-structure). Decode it and review its contents.
 
-```text
-{
-  "iss": "https://${account.namespace}/",
-  "sub": "auth0|5a620d29a840170a9ef43672",
-  "aud": "https://${account.namespace}/api/v2/",
-  "iat": 1521031317,
-  "exp": 1521038517,
-  "azp": "${account.clientId}",
-  "scope": "read:current_user"
-}
-```
-
-Notice:
-
-- The `aud` is set to the `audience` you provided when authenticating (your tenant's API URI)
-- The granted `scope` is `read:current_user`
-- The `sub` is the user ID of the currently logged-in user
-
-2. Retrieve the user profile from the [Get User by ID endpoint](/api/management/v2#!/Users/get_users_by_id). Include the Management API Token in the `Authorization` header of the request:
-
-```har
-{
-  "method": "GET",
-  "url": "https://${account.namespace}/api/v2/users/USER_ID",
-  "headers": [{
-    "name": "Authorization",
-    "value": "Bearer YOUR_MGMT_API_ACCESS_TOKEN"
-  }]
-}
-```
+2. Call the Management API to retrieve the logged-in user's user profile from the [Get User by ID](/api/management/v2#!/Users/get_users_by_id) endpoint. To call the endpoint, include the encoded Management API Token you retrieved in the `Authorization` header of the request. Be sure to replace the `USER_ID` and `MGMT_API_ACCESS_TOKEN` placeholder values with the logged-in user's user ID (`sub` value from the decoded Management API Token) and the Management API Access Token, respectively.
 
 ## Keep reading
 

@@ -3,6 +3,7 @@ title: Call Your API from a Machine-to-Machine App
 description: Everything you need to know to call your API from your machine-to-machine (M2M) app
 ctaText: Go to Quickstart
 ctaLink: /docs/quickstart/backend
+public: false
 template: microsite
 topics:
   - authentication
@@ -49,6 +50,7 @@ Or, to use our API endpoints, you can follow our tutorial: [Call Your API Using 
   * [Auth0 Backend/API Quickstarts](/quickstart/backend)
   * [Call Your API Using the Client Credentials Flow](/flows/guides/client-credentials/call-api-client-credentials)
   * [Change scopes and add custom claims to tokens using hooks](/api-auth/tutorials/client-credentials/customize-with-hooks)
+  * [Token Storage](/tokens/concepts/token-storage)
 :::
 
 ::: references
@@ -58,8 +60,7 @@ Or, to use our API endpoints, you can follow our tutorial: [Call Your API Using 
 :::
 
 ::: concepts  
-  * [Access Tokens](/tokens/overview-access-tokens)
-  * [Where to store tokens](/security/store-tokens)
+  * [Access Tokens](/tokens/concepts/access-tokens)
 :::
 
 ::::
